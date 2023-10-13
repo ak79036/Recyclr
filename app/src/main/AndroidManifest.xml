@@ -13,13 +13,13 @@
         android:theme="@style/Theme.WasteMangement"
         tools:targetApi="31">
         <activity
-            android:name=".SignUpScreen"
+            android:name=".Activities.SignUpScreen"
             android:exported="false" />
         <activity
-            android:name=".LoginScreen"
+            android:name=".Activities.LoginScreen"
             android:exported="false" />
         <activity
-            android:name=".FlashScreen"
+            android:name=".Activities.FlashScreen"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,7 +31,7 @@
 
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".Activities.MainActivity"
             android:exported="false">
 
         </activity>
