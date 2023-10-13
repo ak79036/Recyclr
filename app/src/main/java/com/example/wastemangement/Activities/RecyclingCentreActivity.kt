@@ -5,6 +5,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -24,13 +27,22 @@ class RecyclingCentreActivity : AppCompatActivity() {
     private lateinit var phoneog:EditText
     private lateinit var emailorg:EditText
     private lateinit var addressorg:EditText
-    private lateinit var employesno:EditText
-    private lateinit var truckno :EditText
+    private lateinit var employesno:String
+    private lateinit var truckno :String
     private lateinit var register:Button
     private lateinit var password: EditText
     private var city: String = ""
     private var lat: Double = 0.0
     private var long: Double = 0.0
+
+    val data1= arrayOf("Less than 10","10 to 50","50 to 100","More than 100")
+    val data2= arrayOf("Less than 2","2 to 5","5 to 10","10 to 20 ","More than 20")
+
+    lateinit var autocompleteTV1: AutoCompleteTextView
+    lateinit var autocompleteTV2: AutoCompleteTextView
+
+    lateinit var adapter1: ArrayAdapter<String>
+    lateinit var adapter2: ArrayAdapter<String>
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -52,6 +64,18 @@ class RecyclingCentreActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recycling_centre)
+
+        autocompleteTV1=findViewById(R.id.drop2)
+        autocompleteTV2=findViewById(R.id.drop3)
+
+        adapter1 = ArrayAdapter<String>(this, R.layout.list_item,data1)
+        adapter2 = ArrayAdapter<String>(this, R.layout.list_item,data2)
+
+
+        autocompleteTV1.setAdapter(adapter1)
+        autocompleteTV2.setAdapter(adapter2)
+
+
      mdatabaseref=FirebaseDatabase.getInstance().getReference("Organization")
         nameorg=findViewById(R.id.centrename)
         phoneog=findViewById(R.id.phoneET)
@@ -61,8 +85,7 @@ class RecyclingCentreActivity : AppCompatActivity() {
             val intent = Intent(this, LocationPickerActivity::class.java)
             startActivityForResult(intent,200)
         }
-        employesno=findViewById(R.id.drop2)
-        truckno=findViewById(R.id.drop3)
+
        register=findViewById(R.id.btnRegister)
         password=findViewById(R.id.password)
         register.setOnClickListener {
@@ -76,8 +99,8 @@ class RecyclingCentreActivity : AppCompatActivity() {
         val phone=phoneog.text.toString().trim{it<=' '}
         val email=emailorg.text.toString().trim{it<=' '}
         val address=addressorg.text.toString().trim{ it<=' ' }
-        val employesno=employesno.text.toString().trim{ it<=' ' }
-        val truckno=truckno.text.toString().trim{it<=' '}
+        employesno=autocompleteTV1.text.toString()
+        truckno=autocompleteTV2.text.toString()
         val password=password.text.toString().trim{it<=' '}
         if(validateForm(name,phone,email,address,employesno,truckno,password))
         {
@@ -113,14 +136,6 @@ class RecyclingCentreActivity : AppCompatActivity() {
 
 
         }
-
-
-
-
-
-
-
-
 
     }
     private fun validateForm(name:String,phone:String,email:String,address:String,employeesno:String,truckno:String,password:String):Boolean
