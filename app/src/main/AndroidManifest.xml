@@ -21,6 +21,11 @@
         <activity
             android:name=".Activities.SignupOrg"
             android:exported="true" >
+
+        </activity>
+        <activity
+            android:name=".Activities.SignUpScreen"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,14 +33,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activities.SignUpScreen"
-            android:exported="false" />
-        <activity
             android:name=".Activities.LoginScreen"
             android:exported="false" />
         <activity
             android:name=".Activities.FlashScreen"
-            android:exported="false"></activity>
+            android:exported="true">
+
+
+        </activity>
         <activity
             android:name=".Activities.MainActivity"
             android:exported="true">

@@ -12,7 +12,7 @@ android {
     defaultConfig {
         applicationId = "com.example.wastemangement"
         minSdk = 28
-        targetSdk = 34
+        targetSdk = 33
         versionCode = 1
         versionName = "1.0"
 
@@ -51,7 +51,7 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-
+    implementation ("com.jpardogo.googleprogressbar:library:1.2.0")
     //lottie files
     implementation("com.airbnb.android:lottie:6.1.0")
     //mapBox

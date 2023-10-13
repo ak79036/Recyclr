@@ -25,6 +25,7 @@
                 app:lottie_rawRes="@raw/agency" />
 
             <TextView
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -114,10 +115,27 @@
                     android:height="60dp"
                     android:hint="Organization Email" />
             </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="28dp"
+                android:layout_marginRight="28dp"
+                android:paddingVertical="8dp"
+                android:paddingTop="8dp"
+                android:layout_gravity="center">
 
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/password"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:height="60dp"
+                    android:hint="Organization Password" />
+            </com.google.android.material.textfield.TextInputLayout>
             <View
                 android:layout_width="380dp"
-                android:layout_height=".1dp"
+                android:layout_height="0.1dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="4dp"
@@ -140,44 +158,10 @@
 
 
 
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="28dp"
-                android:layout_marginRight="28dp"
-                android:paddingTop="8dp"
-                android:hint="State">
-
-                <AutoCompleteTextView
-                    android:id="@+id/drop1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:height="60dp"
-                    android:inputType="none" />
-
-            </com.google.android.material.textfield.TextInputLayout>
 
 
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:id="@+id/ET1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="28dp"
-                android:layout_marginRight="28dp"
-                android:paddingVertical="8dp"
-                android:paddingTop="8dp"
-                android:layout_gravity="center">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:id="@+id/districtET"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:height="60dp"
-                    android:hint="District" />
-            </com.google.android.material.textfield.TextInputLayout>
+
 
 
             <com.google.android.material.textfield.TextInputLayout
@@ -196,8 +180,8 @@
                     android:paddingHorizontal="48dp"
                     android:id="@+id/addressET"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:height="48dp"
+                    android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/baseline_add_location_24"
                     android:gravity="top"
                     android:hint="Address" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -224,36 +208,44 @@
                 android:textStyle="bold"></TextView>
 
             <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="28dp"
                 android:layout_marginRight="28dp"
                 android:hint="Number of Employees/Work Force">
-
-                <AutoCompleteTextView
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:paddingHorizontal="48dp"
                     android:id="@+id/drop2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:height="60dp"
-                    android:inputType="none" />
+
+                    android:gravity="top"
+            />
+
 
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
                 android:paddingTop="8dp"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="28dp"
                 android:layout_marginRight="28dp"
                 android:hint="Number of Trash truck">
-
-                <AutoCompleteTextView
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:paddingHorizontal="48dp"
                     android:id="@+id/drop3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:height="60dp"
-                    android:inputType="none" />
+
+                    android:gravity="top"
+                    />
+
+
+
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -267,7 +259,8 @@
                 android:layout_marginVertical="24dp"
                 android:textSize="15sp"
                 android:text="Register"
-                android:height="60dp" />
+                android:height="60dp"
+                android:layout_marginBottom="10dp"/>
         </LinearLayout>
     </ScrollView>
 
