@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "684229901029",
+    "project_id": "wastemangement-ced8c",
+    "storage_bucket": "wastemangement-ced8c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:684229901029:android:f53ee9b13e3c41fa6b720c",
+        "android_client_info": {
+          "package_name": "com.example.wastemangement"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfxHSIYymW5kRRCNLTYVRmx1S_f-XNZ90"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
