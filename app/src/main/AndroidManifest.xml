@@ -13,10 +13,11 @@
         android:theme="@style/Theme.WasteMangement"
         tools:targetApi="31">
         <activity
+            android:name=".Activities.LocationPickerActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activities.RecyclingCentreActivity"
-            android:exported="false" >
-
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".Activities.SignupOrg"
             android:exported="false" />
@@ -28,12 +29,10 @@
             android:exported="false" />
         <activity
             android:name=".Activities.FlashScreen"
-            android:exported="false">
-
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".Activities.MainActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
