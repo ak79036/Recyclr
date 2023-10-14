@@ -27,7 +27,7 @@
             android:theme="@style/Theme.WasteMangement" />
         <activity
             android:name=".Activities.OrganizationMainActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".Activities.LocationPickerActivity"
             android:exported="false" />
@@ -41,12 +41,12 @@
             android:name=".Activities.LoginScreen"
             android:exported="false" />
         <activity
-            android:name=".Activities.FlashScreen"
+            android:name=".Activities.MainActivity"
             android:exported="true">
 
         </activity>
         <activity
-            android:name=".Activities.MainActivity"
+            android:name=".Activities.FlashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

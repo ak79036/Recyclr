@@ -158,6 +158,7 @@
         app:layout_constraintTop_toTopOf="@+id/materialCardView"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
+        android:clickable="true"
         app:lottie_rawRes="@raw/scan" />
 
     <TextView

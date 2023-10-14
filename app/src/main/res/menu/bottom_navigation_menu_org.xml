@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/orgHomeFragment"
+        android:enabled="true"
+        android:icon="@drawable/baseline_home_24"
+        android:title="Home"/>
+
+    <item
+        android:id="@+id/orgMapFragment"
+        android:enabled="true"
+        android:icon="@drawable/baseline_location_on_24"
+        android:title="Map"/>
+</menu>
