@@ -9,12 +9,39 @@
     android:paddingHorizontal="32dp"
     android:paddingVertical="48dp">
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottieAnimationView3"
+        android:layout_width="150dp"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_rawRes="@raw/bin" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/materialDivider"
+        android:layout_width="5dp"
+        android:layout_height="0dp"
+        app:dividerColor="#3C6C38"
+        app:layout_constraintBottom_toBottomOf="@+id/lottieAnimationView3"
+        app:layout_constraintStart_toEndOf="@+id/lottieAnimationView3"
+        app:layout_constraintTop_toTopOf="@+id/lottieAnimationView3" />
+
     <TextView
+        android:id="@+id/titleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Manage Waste, Better"
-        android:textColor="@color/white"
-        android:textSize="40dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_marginStart="10dp"
+        android:fontFamily="@font/aclonica"
+        android:text="Recyclr"
+        android:textColor="#3C6C38"
+        android:textSize="45dp"
+        app:layout_constraintBottom_toBottomOf="@+id/lottieAnimationView3"
+        app:layout_constraintStart_toEndOf="@+id/materialDivider"
+        app:layout_constraintTop_toTopOf="@+id/lottieAnimationView3" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+

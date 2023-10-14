@@ -11,10 +11,10 @@
         android:label="fragment_home"
         tools:layout="@layout/fragment_home"/>
     <fragment
-        android:id="@+id/mapFragment"
-        android:name="com.example.wastemangement.Fragments.MapFragment"
-        android:label="fragment_map"
-        tools:layout="@layout/fragment_map"/>
+        android:id="@+id/ScanFragment"
+        android:name="com.example.wastemangement.Fragments.ScanFragment"
+        android:label="fragment_scan"
+        tools:layout="@layout/fragment_scan"/>
     <fragment
         android:id="@+id/notificationFragment"
         android:name="com.example.wastemangement.Fragments.NotificationFragment"
@@ -25,4 +25,5 @@
         android:name="com.example.wastemangement.Fragments.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile"/>
+
 </navigation>

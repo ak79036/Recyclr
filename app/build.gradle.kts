@@ -40,6 +40,9 @@ android {
         viewBinding = true
         dataBinding = true
     }
+    androidResources {
+        noCompress ("tflite")
+    }
 }
 
 dependencies {
@@ -52,7 +55,7 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    implementation ("com.jpardogo.googleprogressbar:library:1.2.0")
+
     //lottie files
     implementation("com.airbnb.android:lottie:6.1.0")
     //mapBox
@@ -66,5 +69,24 @@ dependencies {
     // navigation
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.4")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.4")
+    implementation ("com.jpardogo.googleprogressbar:library:1.2.0")
+
+    // CameraX core library
+    implementation ("androidx.camera:camera-core:1.4.0-alpha01")
+
+    // CameraX Camera2 extensions
+    implementation ("androidx.camera:camera-camera2:1.4.0-alpha01")
+
+    // CameraX Lifecycle library
+    implementation ("androidx.camera:camera-lifecycle:1.4.0-alpha01")
+
+    // CameraX View class
+    implementation ("androidx.camera:camera-view:1.4.0-alpha01")
+
+    //WindowManager
+    implementation ("androidx.window:window:1.2.0-beta03")
+
+    implementation ("org.tensorflow:tensorflow-lite-task-vision-play-services:0.4.2")
+    implementation ("com.google.android.gms:play-services-tflite-gpu:16.2.0")
 
 }
