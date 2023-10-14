@@ -5,67 +5,192 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragments.orgHomeFragment"
-    android:padding="32dp">
+    >
+
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical" >
-    <TextView
-        android:id="@+id/orgNameTV"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:textSize="32dp"
-        android:text="Organization Name"/>
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#89BC84"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/lottieAnimationView"
+                android:layout_width="95dp"
+                android:layout_height="95dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="145dp"
+                android:layout_marginBottom="15dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:lottie_autoPlay="true"
+                app:lottie_rawRes="@raw/bin" />
+
+            <TextView
+                android:id="@+id/titleText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/aclonica"
+                android:text="Recyclr"
+                android:textColor="#3C6C38"
+                android:textSize="35dp"
+                app:layout_constraintBottom_toBottomOf="@+id/lottieAnimationView"
+                app:layout_constraintStart_toEndOf="@+id/lottieAnimationView"
+                app:layout_constraintTop_toTopOf="@+id/lottieAnimationView" />
+
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="0dp"
+                android:layout_height="3dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                app:dividerColor="#3C6C38"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+            <TextView
+                android:id="@+id/welcome"
+                android:layout_marginLeft="6dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|start"
+                android:fontFamily="@font/aclonica"
+                android:text="Welcome Back!"
+                android:textColor="#3C6C38"
+                android:textSize="25sp"
+                />
+
+            <TextView
+                android:id="@+id/orgNameTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="#3C6C38"
+                android:layout_gravity=""
+                android:fontFamily="@font/aclonica"
+                android:textSize="40sp"
+                android:text="Organization Name"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="25dp"
+            android:background="#89BC84"
+            android:fontFamily="@font/comfortaa_bold"
+            android:paddingLeft="25dp"
+            android:text="YOUR WASTE CATEGORY"
+            android:textColor="@color/black"
+            android:textSize="25dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp">
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:src="@drawable/nonbiowaste" />
+            <TextView
+                android:id="@+id/BioWasteCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/comfortaa_bold"
+                android:text="BIO-DEGRADABLE WASTE"
+                android:textColor="#3C6C38"
+                android:textSize="17sp"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+                app:layout_constraintStart_toEndOf="@+id/imageView2"
+                app:layout_constraintTop_toTopOf="@+id/imageView2" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp">
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:src="@drawable/recyclablewaste" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/comfortaa_bold"
+                android:text="RECYCLABLE WASTE"
+                android:textColor="#3C6C38"
+                android:textSize="17sp"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+                app:layout_constraintStart_toEndOf="@+id/imageView2"
+                app:layout_constraintTop_toTopOf="@+id/imageView2" />
+        </LinearLayout>
         <View
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"/>
-
-        <!--com.google.android.material.card.MaterialCardView
-            style="@style/Widget.Material3.CardView.Filled"
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            app:cardCornerRadius="8dp"
+            android:layout_margin="16dp">
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="250dp"
                 android:padding="16dp"
                 android:orientation="vertical">
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Notification 1"
-                    android:paddingBottom="8dp"
-                    android:textColor="@color/material_dynamic_neutral10"/>
-                <TextView
+                    android:gravity="center"
+                    android:text="Pickups"
+                    android:padding="2dp"
+                    android:textSize="22sp">
+
+                </TextView>
+                <ScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="yo."/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Notification 2"
-                    android:paddingBottom="8dp"
-                    android:textColor="@color/material_dynamic_neutral10"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="yo."/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Notification 3"
-                    android:paddingBottom="8dp"
-                    android:textColor="@color/material_dynamic_neutral10"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="yo."/>
+                    android:layout_height="match_parent"
+                    android:padding="2dp">
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    </androidx.recyclerview.widget.RecyclerView>
+                </ScrollView>
+
+
             </LinearLayout>
-        </com.google.android.material.card.MaterialCardView-->
+        </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>
 
