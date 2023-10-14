@@ -25,26 +25,21 @@
         </activity>
         <activity
             android:name=".Activities.SignUpScreen"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".Activities.LoginScreen"
             android:exported="false" />
         <activity
             android:name=".Activities.FlashScreen"
-            android:exported="true">
-
-
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".Activities.MainActivity"
             android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <meta-data

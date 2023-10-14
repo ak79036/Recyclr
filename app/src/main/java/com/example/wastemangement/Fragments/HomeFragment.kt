@@ -1,10 +1,13 @@
 package com.example.wastemangement.Fragments
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import com.example.wastemangement.R
 
 // TODO: Rename parameter arguments, choose names that match
@@ -21,6 +24,8 @@ class HomeFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private lateinit var title:TextView
+    var i = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +43,24 @@ class HomeFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        title=view.findViewById(R.id.titleText)
+        animateText("Recyclr")
+    }
+    private fun animateText(text: String) {
+        if (i <= text.length) {
+            val fetchtext: String = text.substring(0, i);
+            title.text = fetchtext
+            Handler(Looper.getMainLooper()).postDelayed(
+                {
+                    i++;
+                    animateText(text)
+                }, 500
+            )
+        }
+
+    }
     companion object {
         /**
          * Use this factory method to create a new instance of
