@@ -1,6 +1,7 @@
 package com.example.wastemangement.Fragments
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.content.res.Configuration
 import android.graphics.Bitmap
 import android.os.Bundle
@@ -11,9 +12,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.ListView
+import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatImageButton
 import androidx.appcompat.widget.AppCompatSpinner
 import androidx.camera.core.AspectRatio
@@ -27,6 +32,10 @@ import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
 import androidx.core.widget.ContentLoadingProgressBar
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.wastemangement.Activities.WasteClassificationActivity
+import com.example.wastemangement.Adapters.DetectedItemAdapter
 import com.example.wastemangement.ObjectDetectorHelper
 import com.example.wastemangement.OverlayView
 import com.example.wastemangement.R
@@ -71,6 +80,13 @@ class ScanFragment : Fragment(), ObjectDetectorHelper.DetectorListener {
     private lateinit var overlayView: OverlayView
     private lateinit var interferenceValue:TextView
 
+    private lateinit var layout1: RelativeLayout
+    private lateinit var layout2: RelativeLayout
+
+    private var detectedList:ArrayList<String> = arrayListOf()
+    private lateinit var displayList:RecyclerView
+    private lateinit var listAdapter:DetectedItemAdapter
+    private lateinit var submitButton: AppCompatButton
 
 
     /** Blocking camera operations are performed using this executor */
@@ -119,11 +135,21 @@ class ScanFragment : Fragment(), ObjectDetectorHelper.DetectorListener {
         maxResultValue=view.findViewById(R.id.max_results_value)
         overlayView=view.findViewById(R.id.overlay)
         interferenceValue=view.findViewById(R.id.inference_time_val)
+        submitButton=view.findViewById(R.id.submitButton)
 
+        layout1=view.findViewById(R.id.unnecessary)
+        layout2=view.findViewById(R.id.unnecessary2)
+
+        displayList=view.findViewById(R.id.DisplayList)
+        displayList.layoutManager=LinearLayoutManager(context)
+        listAdapter = DetectedItemAdapter(requireContext(),detectedList)
+        displayList.adapter=listAdapter
         objectDetectorHelper = ObjectDetectorHelper(
             context = requireContext(),
             objectDetectorListener = this)
 
+        layout1.visibility=View.GONE
+        layout2.visibility=View.GONE
         // Attach listeners to UI control widgets
         initBottomSheetControls()
     }
@@ -191,7 +217,12 @@ class ScanFragment : Fragment(), ObjectDetectorHelper.DetectorListener {
                     /* no op */
                 }
             }
+        submitButton.setOnClickListener {
 
+            val intent = Intent(activity,WasteClassificationActivity::class.java)
+            intent.putStringArrayListExtra("LabelList",detectedList)
+            startActivity(intent)
+        }
         // When clicked, change the underlying model used for object detection
         spinnerModel.setSelection(0, false)
         spinnerModel.onItemSelectedListener =
@@ -318,6 +349,8 @@ class ScanFragment : Fragment(), ObjectDetectorHelper.DetectorListener {
         imageHeight: Int,
         imageWidth: Int
     ) {
+
+        addToList(results!!)
         activity?.runOnUiThread {
             interferenceValue.text =
                 String.format("%d ms", inferenceTime)
@@ -331,6 +364,21 @@ class ScanFragment : Fragment(), ObjectDetectorHelper.DetectorListener {
 
             // Force a redraw
             overlayView.invalidate()
+            listAdapter.updateList(detectedList)
+        }
+    }
+
+    private fun addToList(results: MutableList<Detection>) {
+        for(result in results)
+        {
+            val label = result.categories[0].label
+            if(!detectedList.contains(label)) {
+                if(result.categories[0].score>0.6) {
+                    detectedList.add(label)
+                    Log.i("test", label)
+
+                }
+            }
         }
     }
 
@@ -339,6 +387,7 @@ class ScanFragment : Fragment(), ObjectDetectorHelper.DetectorListener {
             Toast.makeText(requireContext(), error, Toast.LENGTH_SHORT).show()
         }
     }
+
 
     override fun onInitialized() {
         objectDetectorHelper.setupObjectDetector()
