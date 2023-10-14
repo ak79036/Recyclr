@@ -55,6 +55,82 @@
                     android:inputType="text"
                     android:hint="Type name of your centre" />
             </com.google.android.material.textfield.TextInputLayout>
+            <View
+                android:layout_width="380dp"
+                android:layout_height=".1dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="4dp"
+                android:background="#6E6E6E"
+                android:padding="2dp" />
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingLeft="10dp"
+                android:paddingBottom="10dp"
+                android:paddingRight="10dp"
+                android:text="Waste Disposal Types"
+                android:layout_gravity="center_horizontal"
+                android:textSize="21dp"
+                android:textStyle="bold"/>
+                <!--adding a radio button -->
+                <RadioButton
+                    android:layout_marginTop="15dp"
+                    android:id="@+id/But1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:checked="false"
+                    android:padding="4dp"
+                    android:drawableStart="@drawable/smol1"
+                    android:drawablePadding="10dp"
+                    android:text="Non-Biodegradable Waste"
+                    android:layout_marginStart="25dp"
+                    android:textSize="20sp" />
+
+                <!--adding a radio button -->
+                <RadioButton
+                    android:id="@+id/But2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:checked="false"
+                    android:padding="4dp"
+                    android:drawablePadding="10dp"
+                    android:drawableStart="@drawable/smol2"
+                    android:text="Bio-Degradable Waste"
+                    android:layout_marginStart="25dp"
+                    android:textSize="20sp" />
+
+                <!--adding a radio button -->
+                <RadioButton
+                    android:id="@+id/But3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:checked="false"
+                    android:padding="4dp"
+                    android:drawablePadding="10dp"
+                    android:drawableStart="@drawable/smol4"
+                    android:text="Recyclable Waste"
+                    android:layout_marginStart="25dp"
+                    android:textSize="20sp" />
+                <RadioButton
+                    android:id="@+id/But4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:checked="false"
+                    android:padding="4dp"
+                    android:text="E-waste"
+                    android:drawablePadding="10dp"
+                    android:drawableStart="@drawable/smol3"
+                    android:layout_marginStart="25dp"
+                    android:textSize="20sp" />
+
 
             <View
                 android:layout_width="380dp"
