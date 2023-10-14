@@ -1,5 +1,6 @@
 package com.example.wastemangement.Fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -8,6 +9,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.airbnb.lottie.LottieAnimationView
+import com.example.wastemangement.Activities.MainActivity
 import com.example.wastemangement.R
 
 // TODO: Rename parameter arguments, choose names that match
@@ -47,6 +50,12 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         title=view.findViewById(R.id.titleText)
         animateText("Recyclr")
+        val scanBtn = view.findViewById<LottieAnimationView>(R.id.lottieAnimationView2)
+        scanBtn.setOnClickListener{
+            val intent = Intent(activity, MainActivity::class.java)
+            intent.putExtra("key", 69)
+            startActivity(intent)
+        }
     }
     private fun animateText(text: String) {
         if (i <= text.length) {

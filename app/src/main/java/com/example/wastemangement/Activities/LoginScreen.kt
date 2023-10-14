@@ -13,6 +13,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.view.WindowCompat
 import com.example.wastemangement.DataClass.notifyDataClass
 import com.example.wastemangement.R
 import com.google.android.material.snackbar.Snackbar
@@ -38,6 +39,7 @@ class LoginScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login_screen)
+        WindowCompat.setDecorFitsSystemWindows(window, false)
         email= findViewById(R.id.EmailEntryField)
         passworduser = findViewById (R.id.passworduser)
         passwordorg=findViewById(R.id.organisationpassword)
@@ -53,6 +55,12 @@ class LoginScreen : AppCompatActivity() {
         databaserefuser= FirebaseDatabase.getInstance().getReference("Users")
          databasereforg=FirebaseDatabase.getInstance().getReference("Organization")
          dbrefNotify=FirebaseDatabase.getInstance().getReference("ToNotify")
+
+        if(mauth.currentUser!=null){
+            val intent = Intent(this, MainActivity::class.java)
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+        }
 
         checker.setOnClickListener {
             if(checker.isChecked)

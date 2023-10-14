@@ -86,6 +86,7 @@
             cornerRadius="25dp"
             android:id="@+id/passworduser"
             android:visibility="visible"
+            android:inputType="textPassword"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:lines="1" />
@@ -112,6 +113,7 @@
             cornerRadius="25dp"
             android:visibility="invisible"
             android:id="@+id/organisationpassword"
+            android:inputType="textPassword"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:lines="1" />
