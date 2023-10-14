@@ -51,7 +51,13 @@ class LoginScreen : AppCompatActivity() {
         }
         mauth=FirebaseAuth.getInstance()
         databaserefuser= FirebaseDatabase.getInstance().getReference("Users")
-         databasereforg=FirebaseDatabase.getInstance().getReference("Organization")
+        databasereforg=FirebaseDatabase.getInstance().getReference("Organization")
+
+        if(mauth.currentUser!=null){
+            val intent = Intent(this, MainActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+        }
 
         checker.setOnClickListener {
             if(checker.isChecked)
