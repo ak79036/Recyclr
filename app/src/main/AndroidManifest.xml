@@ -17,20 +17,14 @@
             android:exported="false" />
         <activity
             android:name=".Activities.RecyclingCentreActivity"
-            android:exported="false"></activity>
-        <activity
-            android:name=".Activities.SignupOrg"
-            android:exported="true" >
+            android:exported="false">
 
         </activity>
+
         <activity
             android:name=".Activities.SignUpScreen"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:exported="false" >
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".Activities.LoginScreen"
@@ -38,12 +32,16 @@
         <activity
             android:name=".Activities.FlashScreen"
             android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
         <activity
             android:name=".Activities.MainActivity"
-            android:exported="true">
+            android:exported="false">
 
         </activity>
 

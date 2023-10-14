@@ -43,13 +43,13 @@
 
         android:id="@+id/emailInputLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:background="@drawable/rounded"
-        android:layout_height="70dp"
         cornerRadius="25dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
         android:layout_marginStart="35dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="30dp"
+        android:background="@drawable/rounded"
         android:hint="Email Address"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -57,8 +57,8 @@
         app:layout_constraintTop_toBottomOf="@+id/txtSignIn">
 
         <com.google.android.material.textfield.TextInputEditText
-            cornerRadius="25dp"
             android:id="@+id/EmailEntryField"
+            cornerRadius="25dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:lines="1" />
@@ -75,7 +75,7 @@
         android:layout_marginStart="35dp"
         android:layout_marginEnd="30dp"
         android:layout_marginTop="24dp"
-
+        android:visibility="visible"
         android:hint="Password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -84,7 +84,34 @@
 
         <com.google.android.material.textfield.TextInputEditText
             cornerRadius="25dp"
-            android:id="@+id/EmailEntryField1"
+            android:id="@+id/passworduser"
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:lines="1" />
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        cornerRadius="25dp"
+        android:background="@drawable/rounded"
+        android:id="@+id/emailInputLayout2"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+
+        android:layout_height="70dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="24dp"
+        android:visibility="invisible"
+        android:hint="Organisation Password"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/emailInputLayout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            cornerRadius="25dp"
+            android:visibility="invisible"
+            android:id="@+id/organisationpassword"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:lines="1" />
@@ -97,13 +124,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="12dp"
         android:ellipsize="end"
         android:singleLine="true"
         android:text="New Here? Sign Up"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emailInputLayout1"
+        app:layout_constraintEnd_toEndOf="@+id/btnSignin"
+        app:layout_constraintStart_toStartOf="@+id/btnSignin"
+        app:layout_constraintTop_toBottomOf="@+id/btnSignin"
         tools:text="@string/msg_new_here_sign" />
 
     <TextView
@@ -122,18 +149,43 @@
         app:layout_constraintVertical_bias="0.173"
         tools:text="@string/msg_forgot_password" />
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="12dp"
+        android:text="Sign In As Organisation"
+        android:textColor="#2F305A"
+        app:layout_constraintEnd_toStartOf="@+id/numberCheckBox"
+        app:layout_constraintTop_toBottomOf="@+id/txtHeythere" />
+
+    <CheckBox
+        android:id="@+id/numberCheckBox"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+
+
+        android:layout_marginEnd="8dp"
+        android:buttonTint="#2F305A"
+        app:layout_constraintBottom_toTopOf="@+id/emailInputLayout"
+        app:layout_constraintEnd_toEndOf="@+id/emailInputLayout"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.944" />
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnSignin"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginBottom="160dp"
         android:background="@drawable/backgroundbutton"
         android:text="Enter"
         android:textColor="#1B4965"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emailInputLayout1" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
