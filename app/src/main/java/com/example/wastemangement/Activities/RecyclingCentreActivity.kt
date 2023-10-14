@@ -133,7 +133,7 @@ class RecyclingCentreActivity : AppCompatActivity() {
                     dbrefNotify.child("${firebaseuser.uid}").setValue(check)
                     val token= FirebaseMessaging.getInstance().token.toString()
 
-                    var org = organisation(name=name,phone=phone,email=email,address=address, workforceNo = employesno,vehicle=truckno,lat=lat, long = long, fcmtoken = token)
+                    var org = organisation(name=name,phone=phone,email=email,address=address, workforceNo = employesno,vehicle=truckno,lat=lat, long = long, fcmtoken = token, uid = firebaseuser.uid)
                     if(radio1.isChecked)
                     {
                         mdatabaseref.child("biode").child("${firebaseuser.uid}").setValue(org).addOnCompleteListener {

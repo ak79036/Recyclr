@@ -31,12 +31,15 @@ private lateinit var dbrefNotify: DatabaseReference
         savedInstanceState: Bundle?
     ): View? {
 
-         mauth=FirebaseAuth.getInstance()
+          mauth=FirebaseAuth.getInstance()
 
             FirebaseMessaging.getInstance().subscribeToTopic(Topic)
 //        dbrefNotify= FirebaseDatabase.getInstance().getReference("ToNotify")
         val root =  inflater.inflate(R.layout.fragment_notification, container, false)
         val button = root.findViewById<Button>(R.id.sendbtn)
+
+
+
         button.setOnClickListener {
            val title:String="Wastage"
             val message:String="GO And Check the wastage in Map"
@@ -52,8 +55,8 @@ private lateinit var dbrefNotify: DatabaseReference
 
     private fun sendNotification(notification:PushNotification)=CoroutineScope(Dispatchers.IO).launch {
   try {
-      val response= RetrofitInstance.api.postNotification(notification)
-          if(response.isSuccessful)
+       val response= RetrofitInstance.api.postNotification(notification)
+              if(response.isSuccessful)
       {
           Log.d(TAG, "Response:")
       }
