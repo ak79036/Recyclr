@@ -18,6 +18,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.iid.internal.FirebaseInstanceIdInternal
+import com.google.firebase.messaging.FirebaseMessaging
 
 class SignUpScreen : AppCompatActivity() {
     private lateinit var mdatabaseref : DatabaseReference
@@ -65,9 +67,9 @@ class SignUpScreen : AppCompatActivity() {
                 if (task.isSuccessful) {
                     val firebaseuser: FirebaseUser = task.result!!.user!!
                     val firebaseemail = firebaseuser.email
+                     val token= FirebaseMessaging.getInstance().token.toString()
 
-
-                    var user = users(name = name1, email = email1)
+                    var user = users(name = name1, email = email1, fcmtoken = token)
 
                     val check= notifyDataClass(email=email1)
                     dbrefNotify.child("${firebaseuser.uid}").setValue(check)

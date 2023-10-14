@@ -10,5 +10,6 @@ val vehicle:String="",
 val image:String="",
     val lat:Double=0.0,
     val long:Double=0.0,
-    val uid:String=""
+    val uid:String="",
+    val fcmtoken:String=""
 )

@@ -81,8 +81,8 @@ class LoginScreen : AppCompatActivity() {
             mauth.signInWithEmailAndPassword(email1,password).addOnCompleteListener(this)
             {
                     task->
-                val check=notifyDataClass(email=email1)
-                dbrefNotify.child(mauth.uid.toString()).setValue(check)
+//                val check=notifyDataClass(email=email1)
+//                dbrefNotify.child(mauth.uid.toString()).setValue(check)
 
                 if(task.isSuccessful)
                 {
