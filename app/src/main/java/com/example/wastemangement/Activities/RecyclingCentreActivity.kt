@@ -5,11 +5,14 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.EditText
+import android.widget.RadioButton
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.example.wastemangement.DataClass.organisation
@@ -31,6 +34,10 @@ class RecyclingCentreActivity : AppCompatActivity() {
     private lateinit var truckno :String
     private lateinit var register:Button
     private lateinit var password: EditText
+    private lateinit var radio1:CheckBox
+    private lateinit var radio2:CheckBox
+    private lateinit var radio3:CheckBox
+    private lateinit var radio4:CheckBox
     private var city: String = ""
     private var lat: Double = 0.0
     private var long: Double = 0.0
@@ -70,6 +77,14 @@ class RecyclingCentreActivity : AppCompatActivity() {
 
         adapter1 = ArrayAdapter<String>(this, R.layout.list_item,data1)
         adapter2 = ArrayAdapter<String>(this, R.layout.list_item,data2)
+       radio1=findViewById(R.id.But1)
+        radio2=findViewById(R.id.But2)
+        radio3=findViewById(R.id.But3)
+        radio4=findViewById(R.id.But4)
+
+
+
+
 
 
         autocompleteTV1.setAdapter(adapter1)
@@ -111,15 +126,54 @@ class RecyclingCentreActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     val firebaseuser: FirebaseUser = task.result!!.user!!
                     val firebaseemail = firebaseuser.email
+                    var org = organisation(name=name,phone=phone,email=email,address=address, workforceNo = employesno,vehicle=truckno,lat=lat, long = long)
+                  if(radio1.isChecked)
+                  {
+                      mdatabaseref.child("biode").child("${firebaseuser.uid}").setValue(org).addOnCompleteListener {
 
+                          finishAffinity()
+                          val intent: Intent = Intent(this, OrganizationMainActivity::class.java)
+                          startActivity(intent)
+                      }
+                  }
+                    if(radio2.isChecked)
+                    {
+                        mdatabaseref.child("nonbiode").child("${firebaseuser.uid}").setValue(org).addOnCompleteListener {
 
-                    var org = organisation(name=name,phone=phone,email=email,address=address, workforceNo = employesno,vehicle=truckno)
-                    mdatabaseref.child("${firebaseuser.uid}").setValue(org).addOnCompleteListener {
-
-                        finishAffinity()
-                        val intent: Intent = Intent(this, OrganizationMainActivity::class.java)
-                        startActivity(intent)
+                            finishAffinity()
+                            val intent: Intent = Intent(this, OrganizationMainActivity::class.java)
+                            startActivity(intent)
+                        }
                     }
+                    if(radio3.isChecked)
+                    {
+                        mdatabaseref.child("recyclabe").child("${firebaseuser.uid}").setValue(org).addOnCompleteListener {
+
+                            finishAffinity()
+                            val intent: Intent = Intent(this, OrganizationMainActivity::class.java)
+                            startActivity(intent)
+                        }
+
+                    }
+                    if(radio4.isChecked)
+                    {
+                        mdatabaseref.child("ewaste").child("${firebaseuser.uid}").setValue(org).addOnCompleteListener {
+
+                            finishAffinity()
+                            val intent: Intent = Intent(this, OrganizationMainActivity::class.java)
+                            startActivity(intent)
+                        }
+                    }
+
+
+
+
+
+
+
+
+
+
 
 
                 } else {

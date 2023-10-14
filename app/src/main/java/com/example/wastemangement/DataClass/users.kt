@@ -5,6 +5,7 @@ data class users(
     val email:String="",
     val mobno:String="",
     val address:String="",
-    val image:String=""
-
+    val image:String="",
+     val wastagenumber:String="",
+    val wastageurl:String=""
 )

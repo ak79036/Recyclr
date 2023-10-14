@@ -7,5 +7,7 @@ val email:String="",
 val address:String="",
 val workforceNo:String="",
 val vehicle:String="",
-val image:String=""
+val image:String="",
+val lat:Double=0.0,
+val long:Double=0.0
 )
