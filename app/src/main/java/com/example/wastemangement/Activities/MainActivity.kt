@@ -1,5 +1,8 @@
 package com.example.wastemangement.Activities
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.NavController
@@ -22,5 +25,22 @@ class MainActivity : AppCompatActivity() {
 
         setupWithNavController(bottomNavigationView, navController)
 
+        //for creating notification
+        createNotificationChannel()
+
+    }
+
+    private fun createNotificationChannel(){
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            val name = "My Channel"
+            val descriptionText = "Channel for Pickup"
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel = NotificationChannel("saransh", name, importance).apply {
+                description = descriptionText
+            }
+            val notificationManager = getSystemService(NotificationManager::class.java)
+            notificationManager.createNotificationChannel(channel)
+        }
     }
 }
