@@ -1,9 +1,13 @@
 package com.example.wastemangement.Activities
 
 import android.Manifest
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.pm.PackageManager
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -23,9 +27,26 @@ class OrganizationMainActivity : AppCompatActivity() {
         mauth=FirebaseAuth.getInstance()
         dbrefNotify= FirebaseDatabase.getInstance().getReference("ToNotify")
 
+
+        Toast.makeText(this,mauth.uid,Toast.LENGTH_SHORT).show()
+        //for creating notification
+        createNotificationChannel()
         sendnotification()
     }
+    private fun createNotificationChannel(){
 
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            val name = "My Channel"
+            val descriptionText = "Channel for Pickup"
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel = NotificationChannel("saransh", name, importance).apply {
+                description = descriptionText
+            }
+            val notificationManager = getSystemService(NotificationManager::class.java)
+            notificationManager.createNotificationChannel(channel)
+            Toast.makeText(this,mauth.uid,Toast.LENGTH_SHORT).show()
+        }
+    }
     private fun sendnotification(){
         // Build the notification
         val notificationBuilder = NotificationCompat.Builder(this, "saransh")
@@ -41,9 +62,14 @@ class OrganizationMainActivity : AppCompatActivity() {
         flag1.get().addOnSuccessListener {
                 snapshot->
             val check1 = snapshot.child("isnotified").value
-            val check2 = snapshot.child("isOrganization").value
+            val check2 = snapshot.child("organization").value
+            Toast.makeText(this,"${check1},${check2}",Toast.LENGTH_SHORT).show()
+
             if(check1 == false && check2== true ){
                 // Show the notification
+
+                Toast.makeText(this,mauth.uid,Toast.LENGTH_SHORT).show()
+
                 val notificationManager = NotificationManagerCompat.from(this)
                 if (ActivityCompat.checkSelfPermission(
                         this,

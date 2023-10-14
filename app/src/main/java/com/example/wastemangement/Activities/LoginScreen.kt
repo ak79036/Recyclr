@@ -111,10 +111,7 @@ class LoginScreen : AppCompatActivity() {
                     task->
 
                 val check=notifyDataClass(email=email1)
-                if(checker.isChecked)
-                {
-                    dbrefNotify.child(mauth.uid.toString()).setValue(check)
-                }
+                dbrefNotify.child(mauth.uid.toString()).setValue(check)
 
                 if(task.isSuccessful)
                 {

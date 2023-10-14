@@ -55,7 +55,7 @@ private lateinit var dbrefNotify: DatabaseReference
         flag1.get().addOnSuccessListener {
             snapshot->
              val check1 = snapshot.child("isnotified").value
-             val check2 = snapshot.child("isOrganization").value
+             val check2 = snapshot.child("organization").value
             if(check1 == false && check2== true ){
                 // Show the notification
                 val notificationManager = NotificationManagerCompat.from(requireContext())
