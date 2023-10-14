@@ -1,11 +1,11 @@
 package com.example.wastemangement.DataClass
 
 data class users(
-    val name:String="",
+    var name:String="",
     val email:String="",
     val mobno:String="",
-    val address:String="",
-    val image:String="",
-  val uid:String="",
+    var address:String="",
+    var image:String="",
+    val uid:String="",
     val fcmtoken:String=""
 )

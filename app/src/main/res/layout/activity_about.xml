@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.AboutActivity"
+    android:padding="40dp"
+    android:paddingTop="80dp"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="112dp"
+        android:layout_height="112dp"
+        android:src="@mipmap/ic_launcher_round"
+        android:layout_gravity="center"/>
+    
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Recyclr"
+        android:gravity="center"
+        android:textSize="32dp"
+        android:paddingTop="32dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="32dp"
+        android:textSize="16dp"
+        android:text="The Proposed Waste Management App is a comprehensive and easy-to-use interface that aims to eliminate the hassle associated with proper, efficient waste disposal. Our App will deploy an object detection model that will be able to easily detect all the different waste objects, compile them into a list, and classify them automatically into their disposal categories. It also aims to simplify and automate many different aspects of waste management."
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="An app made for the Masterstack Hackathon"/>
+
+</LinearLayout>

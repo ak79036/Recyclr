@@ -3,38 +3,47 @@ package com.example.wastemangement.Fragments
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
+import com.example.wastemangement.Activities.AboutActivity
 import com.example.wastemangement.Activities.LoginScreen
 import com.example.wastemangement.R
 import com.example.wastemangement.databinding.FragmentProfileBinding
+import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
 class ProfileFragment : Fragment() {
 
-    private lateinit var iv_profile:ImageView
+    private lateinit var binding:FragmentProfileBinding
+    private lateinit var iv_profile: ImageView
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var dbrefuser: DatabaseReference
+    private val pfViewModel : ProfileFragmentViewModel by activityViewModels()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = FragmentProfileBinding.inflate(layoutInflater)
+        firebaseAuth=FirebaseAuth.getInstance()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-       return inflater.inflate(R.layout.fragment_profile, container, false)
-
+        return inflater.inflate(R.layout.fragment_profile, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -61,27 +70,40 @@ class ProfileFragment : Fragment() {
                 Toast.makeText(activity, it.message, Toast.LENGTH_SHORT).show()
             }
         }
+        val addrBtn = view.findViewById<LinearLayout>(R.id.addr)
+        val addrLayout = view.findViewById<TextInputLayout>(R.id.addrInputLayout)
+        addrBtn.setOnClickListener {
+            if(addrLayout.visibility == View.VISIBLE){
+                addrLayout.visibility = View.GONE
+            }else{
+                addrLayout.visibility = View.VISIBLE
+            }
+        }
 
+        val aboutBtn = view.findViewById<LinearLayout>(R.id.about)
+        aboutBtn.setOnClickListener {
+            startActivity(Intent(activity, AboutActivity::class.java))
+        }
 
-        iv_profile = view.findViewById(R.id.idProfilePic)
         dbrefuser =  FirebaseDatabase.getInstance().getReference("Users")
 
-        dbrefuser.child("${firebaseAuth.uid}").get()
-            .addOnSuccessListener {
-                    snapshot->
-                val imageURL = snapshot.child("image").value.toString()
-                Glide.with(this@ProfileFragment)
-                    .load(imageURL)
-                    .placeholder(R.drawable.profilevector)
-                    .centerCrop()
-                    .circleCrop()
-                    .into(iv_profile)
+        val pfName = view.findViewById<TextView>(R.id.idProfileName)
+        val pfAddr = view.findViewById<EditText>(R.id.addrEntryField)
+        val pfPic = view.findViewById<ImageView>(R.id.idProfilePic)
 
-                Toast.makeText(activity,imageURL,Toast.LENGTH_SHORT).show()
-            }
+        val name : String? = pfViewModel.name.value
+        pfName.text = name
 
+        val address : String? = pfViewModel.address.value
+        pfAddr.setText(address)
 
-
-
+        val image : String? = pfViewModel.image.value
+        Glide
+            .with(view)
+            .load(image)
+            .placeholder(R.drawable.baseline_account_circle_24)
+            .centerCrop()
+            .circleCrop()
+            .into(pfPic);
     }
 }

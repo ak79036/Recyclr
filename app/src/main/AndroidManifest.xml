@@ -15,7 +15,6 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
 
-
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -25,20 +24,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WasteMangement"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <service android:name=".Notification.FirebaseService"
             android:permission="com.google.android.c2dm.permission.SEND"
             android:exported="false">
-
-   <intent-filter>
-       <action android:name="com.google.firebase.MESSAGING_EVENT"/>
-       <action android:name="com.google.android.c2dm.intent.RECIEVE"/>
-   </intent-filter>
+        <intent-filter>
+            <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            <action android:name="com.google.android.c2dm.intent.RECIEVE"/>
+        </intent-filter>
         </service>
-    <activity android:name=".Activities.WasteClassificationActivity"
-        android:exported="false"/>
+        <activity android:name=".Activities.WasteClassificationActivity"
+            android:exported="false"/>
         <activity
             android:name=".Activities.OrganizationMainActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Activities.AboutActivity"
             android:exported="true" />
         <activity
             android:name=".Activities.LocationPickerActivity"
@@ -72,6 +74,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
