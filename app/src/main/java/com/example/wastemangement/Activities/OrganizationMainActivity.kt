@@ -41,8 +41,8 @@ class OrganizationMainActivity : AppCompatActivity() {
 
         //Toast.makeText(this, mauth.uid, Toast.LENGTH_SHORT).show()
         //for creating notification
-        createNotificationChannel()
-        sendnotification()
+//        createNotificationChannel()
+//        sendnotification()
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.orgFragContainer) as NavHostFragment

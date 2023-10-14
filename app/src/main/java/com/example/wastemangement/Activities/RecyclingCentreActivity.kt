@@ -22,6 +22,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.messaging.FirebaseMessaging
 
 class RecyclingCentreActivity : AppCompatActivity() {
     private lateinit var mdatabaseref: DatabaseReference
@@ -130,9 +131,9 @@ class RecyclingCentreActivity : AppCompatActivity() {
                     val firebaseemail = firebaseuser.email
                     val check=notifyDataClass(isOrganization = true,email=email)
                     dbrefNotify.child("${firebaseuser.uid}").setValue(check)
+                    val token= FirebaseMessaging.getInstance().token.toString()
 
-
-                    var org = organisation(name=name,phone=phone,email=email,address=address, workforceNo = employesno,vehicle=truckno,lat=lat, long = long)
+                    var org = organisation(name=name,phone=phone,email=email,address=address, workforceNo = employesno,vehicle=truckno,lat=lat, long = long, fcmtoken = token)
                     if(radio1.isChecked)
                     {
                         mdatabaseref.child("biode").child("${firebaseuser.uid}").setValue(org).addOnCompleteListener {

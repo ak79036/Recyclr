@@ -2,13 +2,18 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature
+        android:name="android.hardware.camera"
+         />
 
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="com.google.android.c2dm.permission.RECIEVE"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
 
 
     <application
@@ -21,11 +26,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WasteMangement"
         tools:targetApi="31">
-        <activity
-            android:name=".Activities.WasteClassificationActivity"
-            android:exported="false"
-            android:label="@string/title_activity_waste_classification"
-            android:theme="@style/Theme.WasteMangement" />
+        <service android:name=".Notification.FirebaseService"
+            android:permission="com.google.android.c2dm.permission.SEND"
+            android:exported="false">
+
+   <intent-filter>
+       <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+       <action android:name="com.google.android.c2dm.intent.RECIEVE"/>
+   </intent-filter>
+        </service>
+    <activity android:name=".Activities.WasteClassificationActivity"
+        android:exported="false"/>
         <activity
             android:name=".Activities.OrganizationMainActivity"
             android:exported="true" />
@@ -34,16 +45,22 @@
             android:exported="false" />
         <activity
             android:name=".Activities.RecyclingCentreActivity"
-            android:exported="false"></activity>
+            android:exported="false">
+
+        </activity>
+
         <activity
             android:name=".Activities.SignUpScreen"
-            android:exported="false"></activity>
+            android:exported="false" >
+
+        </activity>
         <activity
             android:name=".Activities.LoginScreen"
             android:exported="false" />
         <activity
             android:name=".Activities.MainActivity"
             android:exported="true">
+
 
         </activity>
         <activity

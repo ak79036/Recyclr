@@ -25,6 +25,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -147,8 +148,9 @@ class SignUpScreen : AppCompatActivity() {
                     val firebaseuser: FirebaseUser = task.result!!.user!!
                     val firebaseemail = firebaseuser.email
 
+                    val token= FirebaseMessaging.getInstance().token.toString()
 
-                    var user = users(name = name1, email = email1,image = imageUrl!!)
+                    var user = users(name = name1, email = email1,image = imageUrl!!, fcmtoken = token)
 
                     Toast.makeText(this,imageUrl,Toast.LENGTH_SHORT).show()
 
