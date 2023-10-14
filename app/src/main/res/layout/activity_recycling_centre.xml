@@ -34,7 +34,7 @@
                 android:paddingRight="10dp"
                 android:text="Recycling Centre"
                 android:textSize="21dp"
-                android:textStyle="bold"></TextView>
+                android:textStyle="bold"/>
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"

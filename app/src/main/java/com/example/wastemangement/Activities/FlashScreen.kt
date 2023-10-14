@@ -12,7 +12,6 @@ class FlashScreen : AppCompatActivity() {
         setContentView(R.layout.activity_flash_screen)
       Handler().postDelayed({
           startActivity(Intent(this, LoginScreen::class.java))
-
       },2500)
     }
 }
