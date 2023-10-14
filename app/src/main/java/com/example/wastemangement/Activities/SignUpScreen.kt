@@ -10,6 +10,7 @@ import android.widget.RadioButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import com.example.wastemangement.DataClass.notifyDataClass
 import com.example.wastemangement.DataClass.users
 import com.example.wastemangement.R
 import com.google.android.material.snackbar.Snackbar
@@ -26,6 +27,7 @@ class SignUpScreen : AppCompatActivity() {
     private lateinit var password:EditText
     private lateinit var button:Button
     private lateinit var intentauth:RadioButton
+    private lateinit var dbrefNotify:DatabaseReference
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up_screen)
@@ -36,6 +38,9 @@ class SignUpScreen : AppCompatActivity() {
         mauth= FirebaseAuth.getInstance()
 
         mdatabaseref= FirebaseDatabase.getInstance().getReference("Users")
+        dbrefNotify=FirebaseDatabase.getInstance().getReference("ToNotify")
+
+
         button.setOnClickListener{
             registeruser()
         }
@@ -63,6 +68,11 @@ class SignUpScreen : AppCompatActivity() {
 
 
                     var user = users(name = name1, email = email1)
+
+                    val check= notifyDataClass(email=email1)
+                    dbrefNotify.child("${firebaseuser.uid}").setValue(check)
+
+
                     mdatabaseref.child("${firebaseuser.uid}").setValue(user).addOnCompleteListener {
 
                         finishAffinity()
