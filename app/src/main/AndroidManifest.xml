@@ -2,16 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-feature
-        android:name="android.hardware.camera"
-         />
+    <uses-feature android:name="android.hardware.camera" />
 
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -24,6 +21,11 @@
         android:theme="@style/Theme.WasteMangement"
         tools:targetApi="31">
         <activity
+            android:name=".Activities.WasteClassificationActivity"
+            android:exported="false"
+            android:label="@string/title_activity_waste_classification"
+            android:theme="@style/Theme.WasteMangement" />
+        <activity
             android:name=".Activities.OrganizationMainActivity"
             android:exported="false" />
         <activity
@@ -31,22 +33,16 @@
             android:exported="false" />
         <activity
             android:name=".Activities.RecyclingCentreActivity"
-            android:exported="false">
-
-        </activity>
-
+            android:exported="false"></activity>
         <activity
             android:name=".Activities.SignUpScreen"
-            android:exported="false" >
-
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".Activities.LoginScreen"
             android:exported="false" />
         <activity
             android:name=".Activities.FlashScreen"
             android:exported="true">
-
 
         </activity>
         <activity

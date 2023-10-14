@@ -15,6 +15,7 @@
 -->
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bottom_sheet_layout"
     android:layout_width="match_parent"
     android:layout_gravity="center_horizontal"
@@ -222,6 +223,7 @@
 
         <!-- Delegate selection row -->
         <RelativeLayout
+            android:id="@+id/unnecessary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/bottom_sheet_default_row_margin">
@@ -247,6 +249,7 @@
 
         <!-- Model selection row -->
         <RelativeLayout
+            android:id="@+id/unnecessary2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/bottom_sheet_default_row_margin">
@@ -269,5 +272,32 @@
                 android:entries="@array/models_spinner_titles"/>
 
         </RelativeLayout>
+        <TextView
+            android:text="DETECTED LIST"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textSize="@dimen/bottom_sheet_text_size"
+            android:textColor="@color/bottom_sheet_text_color" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/DisplayList"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/listbg"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            tools:listitem="@layout/recitem"
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/submitButton"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:background="@drawable/backgroundbutton"
+            android:layout_gravity="center_horizontal"
+            android:text="Submit Waste "
+            android:textSize="15sp"
+            android:textColor="#1B4965"
+             />
     </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.core.widget.NestedScrollView>

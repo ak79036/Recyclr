@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.WasteClassificationActivity">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#89BC84"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottieAnimationView"
+            android:layout_width="95dp"
+            android:layout_height="95dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_rawRes="@raw/bin" />
+
+        <TextView
+            android:id="@+id/titleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/aclonica"
+            android:text="Waste Disposal"
+            android:textColor="#3C6C38"
+            android:textSize="30dp"
+            app:layout_constraintBottom_toBottomOf="@+id/lottieAnimationView"
+            app:layout_constraintStart_toEndOf="@+id/lottieAnimationView"
+            app:layout_constraintTop_toTopOf="@+id/lottieAnimationView" />
+
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="0dp"
+            android:layout_height="3dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            app:dividerColor="#3C6C38"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="45dp"
+        android:background="#D2FFE0"
+        android:fontFamily="@font/comfortaa_bold"
+        android:paddingLeft="25dp"
+        android:text="LOCATION"
+        android:textColor="#3C6C38"
+        android:textSize="25dp"
+        android:drawableStart="@drawable/mapicon"
+        android:drawableTint="#3C6C38"
+        android:drawablePadding="@dimen/_20pxh"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
+    <ImageView
+        android:id="@+id/LocationfetchButton"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/map"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <TextView
+        android:id="@+id/AddressField"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="45dp"
+        android:text="IIT ISM DHANBAD"
+        android:textColor="#3C6C38"
+        android:textSize="25dp"
+        android:gravity="bottom"
+        android:ellipsize="end"
+        android:lines="1"
+        android:fontFamily="@font/comfortaa_bold"
+        app:layout_constraintBottom_toBottomOf="@+id/LocationfetchButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/LocationfetchButton"
+        app:layout_constraintTop_toTopOf="@+id/LocationfetchButton" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/materialDivider2"
+        android:layout_width="0dp"
+        android:layout_height="3dp"
+        app:dividerColor="#3C6C38"
+        app:layout_constraintEnd_toEndOf="@+id/AddressField"
+        app:layout_constraintStart_toStartOf="@+id/AddressField"
+        app:layout_constraintTop_toBottomOf="@+id/AddressField" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="45dp"
+        android:background="#D2FFE0"
+        android:fontFamily="@font/comfortaa_bold"
+        android:paddingLeft="25dp"
+        android:text="WASTE DETECTED"
+        android:textColor="#3C6C38"
+        android:textSize="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/materialDivider2" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_marginTop="20dp"
+        android:background="#89BC84"
+        android:drawableStart="@drawable/smol1"
+        android:drawablePadding="@dimen/_20pxh"
+        android:fontFamily="@font/comfortaa_bold"
+
+        android:paddingStart="10dp"
+        android:paddingLeft="25dp"
+        android:paddingEnd="10dp"
+        android:text="NON-BIODEGRADABLE"
+        android:textColor="#3C6C38"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/NonBioRecView"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6"
+        tools:listitem="@layout/wasteitem" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_marginTop="20dp"
+        android:background="#89BC84"
+        android:drawableStart="@drawable/smol2"
+        android:drawablePadding="@dimen/_20pxh"
+
+        android:fontFamily="@font/comfortaa_bold"
+        android:paddingStart="10dp"
+        android:paddingLeft="25dp"
+        android:paddingEnd="10dp"
+        android:text="BIODEGRADABLE"
+        android:textColor="#3C6C38"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/NonBioRecView" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/BioRecView"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView7"
+        tools:listitem="@layout/wasteitem" />
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_marginTop="20dp"
+            android:background="#89BC84"
+            android:drawableStart="@drawable/smol4"
+            android:drawablePadding="@dimen/_20pxh"
+
+            android:fontFamily="@font/comfortaa_bold"
+            android:paddingStart="10dp"
+            android:paddingLeft="25dp"
+            android:paddingEnd="10dp"
+            android:text="RECYCLABLE"
+            android:textColor="#3C6C38"
+            android:textSize="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/BioRecView" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/RecRecView"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView8"
+            tools:listitem="@layout/wasteitem" />
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_marginTop="20dp"
+            android:background="#89BC84"
+            android:drawableStart="@drawable/smol3"
+            android:drawablePadding="@dimen/_20pxh"
+
+            android:fontFamily="@font/comfortaa_bold"
+            android:paddingStart="10dp"
+            android:paddingLeft="25dp"
+            android:paddingEnd="10dp"
+            android:text="E-WASTE"
+            android:textColor="#3C6C38"
+            android:textSize="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/RecRecView" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/ERecView"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView9"
+            tools:listitem="@layout/wasteitem" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/submitButton"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/backgroundbutton"
+            android:backgroundTint="#D2FFE0"
+            android:text="Submit Waste"
+            android:textColor="#3C6C38"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ERecView" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
