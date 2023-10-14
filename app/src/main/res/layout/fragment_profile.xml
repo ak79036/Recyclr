@@ -8,12 +8,12 @@
     android:paddingTop="80dp">
 
     <ImageView
-        android:layout_gravity="center_horizontal"
         android:id="@+id/idProfilePic"
+        android:layout_gravity="center_horizontal"
         android:layout_width="112dp"
         android:layout_height="112dp"
         android:src="@drawable/baseline_account_circle_24"
-        app:tint="#FF85AB70" />
+        />
 
     <TextView
         android:id="@+id/idProfileName"

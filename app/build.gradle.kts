@@ -89,4 +89,17 @@ dependencies {
     implementation ("org.tensorflow:tensorflow-lite-task-vision-play-services:0.4.2")
     implementation ("com.google.android.gms:play-services-tflite-gpu:16.2.0")
 
+    //glide
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+
+    // cloudinary
+    implementation ("com.cloudinary:cloudinary-android:2.3.1")
+    implementation ("com.cloudinary:cloudinary-core:1.24.0")
+
+    //coroutines
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0")  // Replace with the latest version
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1")  // Replace with the latest version
+    implementation ("androidx.room:room-ktx:2.3.0")  // Replace with the latest version
+    implementation ("com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2")  // Replace with the latest version
+
 }
