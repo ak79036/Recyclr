@@ -117,7 +117,7 @@ class RecyclingCentreActivity : AppCompatActivity() {
                     mdatabaseref.child("${firebaseuser.uid}").setValue(org).addOnCompleteListener {
 
                         finishAffinity()
-                        val intent: Intent = Intent(this, MainActivity::class.java)
+                        val intent: Intent = Intent(this, OrganizationMainActivity::class.java)
                         startActivity(intent)
                     }
 
