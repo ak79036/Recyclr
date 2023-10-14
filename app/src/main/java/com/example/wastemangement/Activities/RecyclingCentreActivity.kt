@@ -9,6 +9,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -36,6 +37,13 @@ class RecyclingCentreActivity : AppCompatActivity() {
     private var city: String = ""
     private var lat: Double = 0.0
     private var long: Double = 0.0
+    private lateinit var radio1:CheckBox
+    private lateinit var radio2:CheckBox
+    private lateinit var radio3: CheckBox
+    private lateinit var radio4:CheckBox
+
+
+
 
     val data1= arrayOf("Less than 10","10 to 50","50 to 100","More than 100")
     val data2= arrayOf("Less than 2","2 to 5","5 to 10","10 to 20 ","More than 20")
@@ -66,6 +74,12 @@ class RecyclingCentreActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recycling_centre)
+
+
+        radio1=findViewById(R.id.But1)
+        radio2=findViewById(R.id.But2)
+        radio3=findViewById(R.id.But3)
+        radio4=findViewById(R.id.But4)
 
         autocompleteTV1=findViewById(R.id.drop2)
         autocompleteTV2=findViewById(R.id.drop3)
@@ -114,19 +128,52 @@ class RecyclingCentreActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     val firebaseuser: FirebaseUser = task.result!!.user!!
                     val firebaseemail = firebaseuser.email
-
-
-                    var org = organisation(name=name,phone=phone,email=email,address=address, workforceNo = employesno,vehicle=truckno)
-
                     val check=notifyDataClass(isOrganization = true,email=email)
                     dbrefNotify.child("${firebaseuser.uid}").setValue(check)
 
-                    mdatabaseref.child("${firebaseuser.uid}").setValue(org).addOnCompleteListener {
 
-                        finishAffinity()
-                        val intent: Intent = Intent(this, OrganizationMainActivity::class.java)
-                        startActivity(intent)
+                    var org = organisation(name=name,phone=phone,email=email,address=address, workforceNo = employesno,vehicle=truckno,lat=lat, long = long)
+                    if(radio1.isChecked)
+                    {
+                        mdatabaseref.child("biode").child("${firebaseuser.uid}").setValue(org).addOnCompleteListener {
+
+                            finishAffinity()
+                            val intent: Intent = Intent(this, OrganizationMainActivity::class.java)
+                            startActivity(intent)
+                        }
                     }
+                    if(radio2.isChecked)
+                    {
+                        mdatabaseref.child("nonbiode").child("${firebaseuser.uid}").setValue(org).addOnCompleteListener {
+
+                            finishAffinity()
+                            val intent: Intent = Intent(this, OrganizationMainActivity::class.java)
+                            startActivity(intent)
+                        }
+                    }
+                    if(radio3.isChecked)
+                    {
+                        mdatabaseref.child("recyclabe").child("${firebaseuser.uid}").setValue(org).addOnCompleteListener {
+
+                            finishAffinity()
+                            val intent: Intent = Intent(this, OrganizationMainActivity::class.java)
+                            startActivity(intent)
+                        }
+
+                    }
+                    if(radio4.isChecked)
+                    {
+                        mdatabaseref.child("ewaste").child("${firebaseuser.uid}").setValue(org).addOnCompleteListener {
+
+                            finishAffinity()
+                            val intent: Intent = Intent(this, OrganizationMainActivity::class.java)
+                            startActivity(intent)
+                        }
+                    }
+
+
+
+
 
 
                 } else {
