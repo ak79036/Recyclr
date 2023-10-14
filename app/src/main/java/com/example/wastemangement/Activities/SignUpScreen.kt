@@ -69,7 +69,7 @@ class SignUpScreen : AppCompatActivity() {
                     val firebaseemail = firebaseuser.email
                      val token= FirebaseMessaging.getInstance().token.toString()
 
-                    var user = users(name = name1, email = email1, fcmtoken = token, uid = firebaseuser.uid)
+                    var user = users(name = name1, email = email1, fcmtoken = token, uid = mauth.uid.toString())
 
                     val check= notifyDataClass(email=email1)
                     dbrefNotify.child("${firebaseuser.uid}").setValue(check)

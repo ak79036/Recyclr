@@ -42,7 +42,7 @@ class RecyclingCentreActivity : AppCompatActivity() {
     private lateinit var radio2:CheckBox
     private lateinit var radio3: CheckBox
     private lateinit var radio4:CheckBox
-
+   private lateinit var mauth:FirebaseAuth
 
 
 
@@ -76,7 +76,7 @@ class RecyclingCentreActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recycling_centre)
 
-
+    mauth= FirebaseAuth.getInstance()
         radio1=findViewById(R.id.But1)
         radio2=findViewById(R.id.But2)
         radio3=findViewById(R.id.But3)
@@ -133,7 +133,7 @@ class RecyclingCentreActivity : AppCompatActivity() {
                     dbrefNotify.child("${firebaseuser.uid}").setValue(check)
                     val token= FirebaseMessaging.getInstance().token.toString()
 
-                    var org = organisation(name=name,phone=phone,email=email,address=address, workforceNo = employesno,vehicle=truckno,lat=lat, long = long, fcmtoken = token, uid = firebaseuser.uid)
+                    var org = organisation(name=name,phone=phone,email=email,address=address, workforceNo = employesno,vehicle=truckno,lat=lat, long = long, fcmtoken = token, uid =mauth.uid.toString() )
                     if(radio1.isChecked)
                     {
                         mdatabaseref.child("biode").child("${firebaseuser.uid}").setValue(org).addOnCompleteListener {
