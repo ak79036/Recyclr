@@ -72,11 +72,13 @@ class ProfileFragment : Fragment() {
         }
         val addrBtn = view.findViewById<LinearLayout>(R.id.addr)
         val addrLayout = view.findViewById<TextInputLayout>(R.id.addrInputLayout)
+        val pfAddr = view.findViewById<EditText>(R.id.addrEntryField)
         addrBtn.setOnClickListener {
             if(addrLayout.visibility == View.VISIBLE){
                 addrLayout.visibility = View.GONE
             }else{
                 addrLayout.visibility = View.VISIBLE
+                pfAddr.setText(pfViewModel.address.value)
             }
         }
 
@@ -88,7 +90,6 @@ class ProfileFragment : Fragment() {
         dbrefuser =  FirebaseDatabase.getInstance().getReference("Users")
 
         val pfName = view.findViewById<TextView>(R.id.idProfileName)
-        val pfAddr = view.findViewById<EditText>(R.id.addrEntryField)
         val pfPic = view.findViewById<ImageView>(R.id.idProfilePic)
 
         val name : String? = pfViewModel.name.value
