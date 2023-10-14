@@ -13,10 +13,11 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.core.view.WindowCompat
+import com.example.wastemangement.DataClass.notifyDataClass
 import com.example.wastemangement.R
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
@@ -24,6 +25,7 @@ class LoginScreen : AppCompatActivity() {
     private lateinit var mauth:FirebaseAuth
     private lateinit var databaserefuser:DatabaseReference
     private lateinit var databasereforg:DatabaseReference
+    private lateinit var dbrefNotify:DatabaseReference
     private lateinit var email:EditText
     private lateinit var passworduser:EditText
     private lateinit var passwordorg:EditText
@@ -35,7 +37,6 @@ class LoginScreen : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        WindowCompat.setDecorFitsSystemWindows(window, false)
         setContentView(R.layout.activity_login_screen)
         email= findViewById(R.id.EmailEntryField)
         passworduser = findViewById (R.id.passworduser)
@@ -45,19 +46,13 @@ class LoginScreen : AppCompatActivity() {
         layoutuserpass=findViewById(R.id.emailInputLayout1)
         layoutorgpass=findViewById(R.id.emailInputLayout2)
         checker=findViewById(R.id.numberCheckBox)
-
         signupintent.setOnClickListener {
             startActivity(Intent(this,SignUpScreen::class.java))
         }
         mauth=FirebaseAuth.getInstance()
         databaserefuser= FirebaseDatabase.getInstance().getReference("Users")
-        databasereforg=FirebaseDatabase.getInstance().getReference("Organization")
-
-        if(mauth.currentUser!=null){
-            val intent = Intent(this, MainActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent)
-        }
+         databasereforg=FirebaseDatabase.getInstance().getReference("Organization")
+         dbrefNotify=FirebaseDatabase.getInstance().getReference("ToNotify")
 
         checker.setOnClickListener {
             if(checker.isChecked)
@@ -114,6 +109,13 @@ class LoginScreen : AppCompatActivity() {
             mauth.signInWithEmailAndPassword(email1,password).addOnCompleteListener(this)
             {
                     task->
+
+                val check=notifyDataClass(email=email1)
+                if(checker.isChecked)
+                {
+                    dbrefNotify.child(mauth.uid.toString()).setValue(check)
+                }
+
                 if(task.isSuccessful)
                 {
                     finishAffinity()
@@ -140,9 +142,20 @@ class LoginScreen : AppCompatActivity() {
         val email1=email.text.toString().trim{it<=' '}
         val password=passwordorg.text.toString().trim{ it<=' ' }
         if (validateForm(email1,password)) {
+
+
             mauth.signInWithEmailAndPassword(email1,password).addOnCompleteListener(this)
             {
+
+
+
                 task->
+
+                val check=notifyDataClass(isOrganization = true,email=email1)
+                if(checker.isChecked)
+                {
+                    dbrefNotify.child(mauth.uid.toString()).setValue(check)
+                }
              if(task.isSuccessful)
              {
                  finishAffinity()

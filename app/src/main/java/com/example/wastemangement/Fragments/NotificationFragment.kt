@@ -11,19 +11,24 @@ import android.widget.Button
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import com.example.wastemangement.DataClass.notifyDataClass
 import com.example.wastemangement.R
-
-
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ktx.snapshots
 
 
 class NotificationFragment : Fragment() {
 
-
+private  lateinit var mauth:FirebaseAuth
+private lateinit var dbrefNotify: DatabaseReference
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
+     mauth=FirebaseAuth.getInstance()
+        dbrefNotify= FirebaseDatabase.getInstance().getReference("ToNotify")
         val root =  inflater.inflate(R.layout.fragment_notification, container, false)
         val button = root.findViewById<Button>(R.id.sendbtn)
         button.setOnClickListener {
@@ -45,16 +50,30 @@ class NotificationFragment : Fragment() {
             .setDefaults(NotificationCompat.DEFAULT_ALL)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
 
-        // Show the notification
-        val notificationManager = NotificationManagerCompat.from(requireContext())
-        if (ActivityCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.POST_NOTIFICATIONS
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            return
+
+        val flag1 = dbrefNotify.child("${mauth.uid}")
+        flag1.get().addOnSuccessListener {
+            snapshot->
+             val check1 = snapshot.child("isnotified").value
+             val check2 = snapshot.child("isOrganization").value
+            if(check1 == false && check2== true ){
+                // Show the notification
+                val notificationManager = NotificationManagerCompat.from(requireContext())
+                if (ActivityCompat.checkSelfPermission(
+                        requireContext(),
+                        Manifest.permission.POST_NOTIFICATIONS
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) {
+                    return@addOnSuccessListener
+                }
+                notificationManager.notify(1, notificationBuilder.build())
+                val check= notifyDataClass(isnotified = true)
+                dbrefNotify.child("${mauth.uid}").setValue(check)
+            }
         }
-        notificationManager.notify(1, notificationBuilder.build())
+
+
+
     }
 
 }
