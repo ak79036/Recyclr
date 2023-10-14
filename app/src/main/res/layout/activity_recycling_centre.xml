@@ -77,7 +77,7 @@
                 android:textSize="21dp"
                 android:textStyle="bold"/>
                 <!--adding a radio button -->
-                <RadioButton
+                <CheckBox
                     android:layout_marginTop="15dp"
                     android:id="@+id/But1"
                     android:layout_width="wrap_content"
@@ -92,7 +92,7 @@
                     android:textSize="20sp" />
 
                 <!--adding a radio button -->
-                <RadioButton
+                <CheckBox
                     android:id="@+id/But2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -106,7 +106,7 @@
                     android:textSize="20sp" />
 
                 <!--adding a radio button -->
-                <RadioButton
+                <CheckBox
                     android:id="@+id/But3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -118,7 +118,7 @@
                     android:text="Recyclable Waste"
                     android:layout_marginStart="25dp"
                     android:textSize="20sp" />
-                <RadioButton
+                <CheckBox
                     android:id="@+id/But4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
