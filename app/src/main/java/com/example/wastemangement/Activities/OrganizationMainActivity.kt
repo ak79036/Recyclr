@@ -3,6 +3,7 @@ package com.example.wastemangement.Activities
 import android.Manifest
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -32,6 +33,11 @@ class OrganizationMainActivity : AppCompatActivity() {
         mauth = FirebaseAuth.getInstance()
         dbrefNotify = FirebaseDatabase.getInstance().getReference("ToNotify")
 
+        val sharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.apply{
+            putBoolean("type", false)
+        }.apply()
 
         //Toast.makeText(this, mauth.uid, Toast.LENGTH_SHORT).show()
         //for creating notification

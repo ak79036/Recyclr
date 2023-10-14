@@ -2,6 +2,7 @@ package com.example.wastemangement.Activities
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -19,6 +20,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val sharedPref = this@MainActivity?.getPreferences(Context.MODE_PRIVATE) ?: return
+        with (sharedPref.edit()) {
+            putString(getString(com.example.wastemangement.R.string.user_type), "user")
+            apply()
+        }
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragContainer) as NavHostFragment
