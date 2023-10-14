@@ -2,9 +2,11 @@ package com.example.wastemangement.Activities
 
 import android.app.Activity
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
@@ -17,6 +19,7 @@ import com.example.wastemangement.DataClass.notifyDataClass
 import com.example.wastemangement.DataClass.organisation
 import com.example.wastemangement.DataClass.users
 import com.example.wastemangement.R
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -131,46 +134,68 @@ class RecyclingCentreActivity : AppCompatActivity() {
                     val firebaseemail = firebaseuser.email
                     val check=notifyDataClass(isOrganization = true,email=email)
                     dbrefNotify.child("${firebaseuser.uid}").setValue(check)
-                    val token= FirebaseMessaging.getInstance().token.toString()
+                    val sharedPreferences=getSharedPreferences("TokenPreferences", MODE_PRIVATE)
+                    val savedToken=sharedPreferences.getString("SavedToken","Nothing")
+                    if(savedToken.equals("Nothing")){
+                        FirebaseMessaging.getInstance().token.addOnCompleteListener(
+                            OnCompleteListener { task ->
+                            if (!task.isSuccessful) {
+                                Log.w("Task Unsuccessful", "Fetching FCM registration token failed", task.exception)
+                                return@OnCompleteListener
+                            }
+                            // Get new FCM registration token
+                            val token = task.result.toString()
 
-                    var org = organisation(name=name,phone=phone,email=email,address=address, workforceNo = employesno,vehicle=truckno,lat=lat, long = long, fcmtoken = token, uid =mauth.uid.toString() )
-                    if(radio1.isChecked)
-                    {
-                        mdatabaseref.child("biode").child("${firebaseuser.uid}").setValue(org).addOnCompleteListener {
+                                var org = organisation(name=name,phone=phone,email=email,address=address, workforceNo = employesno,vehicle=truckno,lat=lat, long = long, fcmtoken = token, uid =mauth.uid.toString() )
+                                if(radio1.isChecked)
+                                {
+                                    mdatabaseref.child("biode").child("${firebaseuser.uid}").setValue(org).addOnCompleteListener {
 
-                            finishAffinity()
-                            val intent: Intent = Intent(this, OrganizationMainActivity::class.java)
-                            startActivity(intent)
-                        }
+                                        finishAffinity()
+                                        val intent: Intent = Intent(this, OrganizationMainActivity::class.java)
+                                        startActivity(intent)
+                                    }
+                                }
+                                if(radio2.isChecked)
+                                {
+                                    mdatabaseref.child("nonbiode").child("${firebaseuser.uid}").setValue(org).addOnCompleteListener {
+
+                                        finishAffinity()
+                                        val intent: Intent = Intent(this, OrganizationMainActivity::class.java)
+                                        startActivity(intent)
+                                    }
+                                }
+                                if(radio3.isChecked)
+                                {
+                                    mdatabaseref.child("recyclabe").child("${firebaseuser.uid}").setValue(org).addOnCompleteListener {
+
+                                        finishAffinity()
+                                        val intent: Intent = Intent(this, OrganizationMainActivity::class.java)
+                                        startActivity(intent)
+                                    }
+
+                                }
+                                if(radio4.isChecked)
+                                {
+                                    mdatabaseref.child("ewaste").child("${firebaseuser.uid}").setValue(org).addOnCompleteListener {
+
+                                        finishAffinity()
+                                        val intent: Intent = Intent(this, OrganizationMainActivity::class.java)
+                                        startActivity(intent)
+                                    }
+                                }
+                            Log.d("Your Device Token=>>>", token)
+                            val editPref: SharedPreferences.Editor=sharedPreferences.edit()
+                            editPref.putString("SavedToken",token)
+                            editPref.commit()
+
+//                            ApiService().addTokenService(token,this)
+//                val list=ArrayList<String>()
+//                list.add(token)
+                        })
                     }
-                    if(radio2.isChecked)
-                    {
-                        mdatabaseref.child("nonbiode").child("${firebaseuser.uid}").setValue(org).addOnCompleteListener {
 
-                            finishAffinity()
-                            val intent: Intent = Intent(this, OrganizationMainActivity::class.java)
-                            startActivity(intent)
-                        }
-                    }
-                    if(radio3.isChecked)
-                    {
-                        mdatabaseref.child("recyclabe").child("${firebaseuser.uid}").setValue(org).addOnCompleteListener {
 
-                            finishAffinity()
-                            val intent: Intent = Intent(this, OrganizationMainActivity::class.java)
-                            startActivity(intent)
-                        }
-
-                    }
-                    if(radio4.isChecked)
-                    {
-                        mdatabaseref.child("ewaste").child("${firebaseuser.uid}").setValue(org).addOnCompleteListener {
-
-                            finishAffinity()
-                            val intent: Intent = Intent(this, OrganizationMainActivity::class.java)
-                            startActivity(intent)
-                        }
-                    }
 
 
 

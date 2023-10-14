@@ -25,14 +25,15 @@ class NotificationFragment : Fragment() {
 
     val TAG:String="NotificationFragment"
 private  lateinit var mauth:FirebaseAuth
-private lateinit var dbrefNotify: DatabaseReference
+private lateinit var mdatabaseref: DatabaseReference
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-          mauth=FirebaseAuth.getInstance()
-
+        mauth=FirebaseAuth.getInstance()
+       mdatabaseref=FirebaseDatabase.getInstance().getReference("Organization").child("biode")
+           val token="com.google.firebase.auth.internal.zzr@680c426"
             FirebaseMessaging.getInstance().subscribeToTopic(Topic)
 //        dbrefNotify= FirebaseDatabase.getInstance().getReference("ToNotify")
         val root =  inflater.inflate(R.layout.fragment_notification, container, false)
@@ -43,7 +44,7 @@ private lateinit var dbrefNotify: DatabaseReference
         button.setOnClickListener {
            val title:String="Wastage"
             val message:String="GO And Check the wastage in Map"
-           PushNotification(Notificationdata(title,message), Topic).also { it->
+           PushNotification(Notificationdata(title,message), token).also { it->
                sendNotification(it)
 
 
@@ -55,7 +56,7 @@ private lateinit var dbrefNotify: DatabaseReference
 
     private fun sendNotification(notification:PushNotification)=CoroutineScope(Dispatchers.IO).launch {
   try {
-       val response= RetrofitInstance.api.postNotification(notification)
+      val response= RetrofitInstance.api.postNotification(notification)
               if(response.isSuccessful)
       {
           Log.d(TAG, "Response:")

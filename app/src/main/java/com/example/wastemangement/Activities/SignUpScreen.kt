@@ -4,23 +4,19 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.MediaStore
 import android.text.TextUtils
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
-import android.widget.ImageView
 import android.widget.TextView
-import android.widget.RadioButton
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import com.bumptech.glide.Glide
-import com.cloudinary.Cloudinary
 import com.example.wastemangement.DataClass.notifyDataClass
 import com.example.wastemangement.DataClass.users
 import com.example.wastemangement.R
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -28,6 +24,12 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.iid.internal.FirebaseInstanceIdInternal
 import com.google.firebase.messaging.FirebaseMessaging
+import android.provider.MediaStore
+import android.util.Log
+import android.widget.ImageView
+import android.widget.RadioButton
+import com.bumptech.glide.Glide
+import com.cloudinary.Cloudinary
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -40,8 +42,8 @@ class SignUpScreen : AppCompatActivity() {
     private lateinit var name:EditText
     private lateinit var email:EditText
     private lateinit var password:EditText
-    private lateinit var address:EditText
     private lateinit var button:Button
+    private lateinit var address:EditText
     private lateinit var intentauth:RadioButton
     private lateinit var dbrefNotify:DatabaseReference
     private lateinit var imageView: ImageView
@@ -53,9 +55,11 @@ class SignUpScreen : AppCompatActivity() {
         name=findViewById(R.id.editTextname)
         email=findViewById(R.id.editTextTextEmailAddress)
         password=findViewById(R.id.editTextTextPassword)
-        address=findViewById(R.id.editTextAddress)
         button=findViewById(R.id.register)
         mauth= FirebaseAuth.getInstance()
+        address=findViewById(R.id.editTextAddress)
+        mdatabaseref= FirebaseDatabase.getInstance().getReference("Users")
+        dbrefNotify=FirebaseDatabase.getInstance().getReference("ToNotify")
 
         imageView =findViewById(R.id.uploadPic)
 
@@ -64,9 +68,6 @@ class SignUpScreen : AppCompatActivity() {
             imageView.setColorFilter(ContextCompat.getColor(this, com.cloudinary.android.preprocess.R.color.mtrl_btn_transparent_bg_color),android.graphics.PorterDuff.Mode.ADD);
 
         }
-
-        mdatabaseref= FirebaseDatabase.getInstance().getReference("Users")
-        dbrefNotify=FirebaseDatabase.getInstance().getReference("ToNotify")
 
 
         button.setOnClickListener{
@@ -79,12 +80,14 @@ class SignUpScreen : AppCompatActivity() {
 
 
     }
+
     private fun openImageChooser() {
         val intent = Intent()
         intent.type = "image/*"
         intent.action = Intent.ACTION_GET_CONTENT
         startActivityForResult(intent, PICK_IMAGE_REQUEST)
     }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -98,7 +101,9 @@ class SignUpScreen : AppCompatActivity() {
             cursor?.use {
                 val columnIndex = it.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
                 it.moveToFirst()
+
                 filePath = it.getString(columnIndex)
+
             }
             Glide
                 .with(imageView)
@@ -144,8 +149,8 @@ class SignUpScreen : AppCompatActivity() {
 
         val name1=name.text.toString().trim{it<=' '}
         val email1=email.text.toString().trim{it<=' '}
-        val password=password.text.toString().trim(){it<=' '}
         val addr = address.text.toString().trim()
+        val password=password.text.toString().trim(){it<=' '}
         if(validateForm(name1,email1,password)) {
             FirebaseAuth.getInstance().createUserWithEmailAndPassword(
                 email1, password
@@ -155,20 +160,42 @@ class SignUpScreen : AppCompatActivity() {
                     val firebaseuser: FirebaseUser = task.result!!.user!!
                     val firebaseemail = firebaseuser.email
 
-                    val token= FirebaseMessaging.getInstance().token.toString()
+                    val sharedPreferences=getSharedPreferences("TokenPreferences", MODE_PRIVATE)
+                    val savedToken=sharedPreferences.getString("SavedToken","Nothing")
+                    if(savedToken.equals("Nothing")){
+                        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+                            if (!task.isSuccessful) {
+                                Log.w("Task Unsuccessful", "Fetching FCM registration token failed", task.exception)
+                                return@OnCompleteListener
+                            }
+                            // Get new FCM registration token
+                            val token = task.result.toString()
+                            var user = users(name = name1, email = email1, fcmtoken=token, uid = mauth.uid.toString(), address = addr, image = imageUrl!!)
+                            mdatabaseref.child("${firebaseuser.uid}").setValue(user).addOnCompleteListener {
 
-                    var user = users(name = name1, email = email1,image = imageUrl!!, fcmtoken = token, address = addr, uid = mauth.uid.toString())
-                    
+                                finishAffinity()
+                                val intent: Intent = Intent(this, MainActivity::class.java)
+                                startActivity(intent)
+
+
+                            }
+                            Log.d("Your Device Token=>>>", token)
+                            val editPref: SharedPreferences.Editor=sharedPreferences.edit()
+                            editPref.putString("SavedToken",token)
+                            editPref.commit()
+//                            ApiService().addTokenService(token,this)
+//                val list=ArrayList<String>()
+//                list.add(token)
+                        })
+                    }
+
+
+
                     val check= notifyDataClass(email=email1)
                     dbrefNotify.child("${firebaseuser.uid}").setValue(check)
 
 
-                    mdatabaseref.child("${firebaseuser.uid}").setValue(user).addOnCompleteListener {
 
-                        finishAffinity()
-                        val intent: Intent = Intent(this, MainActivity::class.java)
-                        startActivity(intent)
-                    }
 
 
                 } else {
