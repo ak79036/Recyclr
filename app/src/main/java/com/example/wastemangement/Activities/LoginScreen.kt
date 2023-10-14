@@ -13,6 +13,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.view.WindowCompat
 import com.example.wastemangement.R
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
@@ -34,6 +35,7 @@ class LoginScreen : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        WindowCompat.setDecorFitsSystemWindows(window, false)
         setContentView(R.layout.activity_login_screen)
         email= findViewById(R.id.EmailEntryField)
         passworduser = findViewById (R.id.passworduser)
@@ -43,6 +45,7 @@ class LoginScreen : AppCompatActivity() {
         layoutuserpass=findViewById(R.id.emailInputLayout1)
         layoutorgpass=findViewById(R.id.emailInputLayout2)
         checker=findViewById(R.id.numberCheckBox)
+
         signupintent.setOnClickListener {
             startActivity(Intent(this,SignUpScreen::class.java))
         }
