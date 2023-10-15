@@ -344,8 +344,6 @@ class WasteClassificationActivity : AppCompatActivity() {
         var nonBioAgency:Agency
         var recAgency:Agency
         var eAgency:Agency
-
-
         var minFCM=""
         var minUID=""
         var minLat=0.0
@@ -467,8 +465,6 @@ class WasteClassificationActivity : AppCompatActivity() {
                                         Log.i("agencycalculation4", "$minFCM,$minUID,$minLat,$minLong")
                                         //Toast.makeText(baseContext,"Was Successful",Toast.LENGTH_SHORT).show()
 
-
-
                                         val name = firebaseAuth.currentUser?.displayName!!
                                         val uid = firebaseAuth.currentUser?.uid!!
                                         firebaseAuth=FirebaseAuth.getInstance()
@@ -482,6 +478,15 @@ class WasteClassificationActivity : AppCompatActivity() {
                                                 "SUCCESSFULLY UPLOADED",
                                                 Toast.LENGTH_SHORT
                                             ).show()
+                                            dbrefuser=FirebaseDatabase.getInstance().getReference("Users")
+                                            dbrefuser.child(firebaseAuth.uid.toString()).get().addOnSuccessListener {snap ->
+                                                val user:users = snap.getValue(users::class.java)!!
+                                                snap.ref.removeValue()
+                                                user.count=user.count+1
+                                                dbrefuser.child(firebaseAuth.uid.toString()).setValue(user)
+
+                                            }
+
                                             val intent = Intent(this@WasteClassificationActivity,UploadFinishedActivity::class.java)
                                             startActivity(intent)
                                             finish()

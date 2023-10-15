@@ -172,9 +172,9 @@ class   SignUpScreen : AppCompatActivity() {
                             val token = task.result.toString()
                             var user = users()
                             if(imageUrl!=null){
-                                user = users(name = name1, email = email1, fcmtoken=token, uid = mauth.uid.toString(), address = addr, image = imageUrl!!)
+                                user = users(name = name1, email = email1, fcmtoken=token, uid = mauth.uid.toString(), address = addr, image = imageUrl!!, count = 0)
                             }else{
-                                user = users(name = name1, email = email1, fcmtoken=token, uid = mauth.uid.toString(), address = addr)
+                                user = users(name = name1, email = email1, fcmtoken=token, uid = mauth.uid.toString(), address = addr, count = 0)
                             }
                             mdatabaseref.child("${firebaseuser.uid}").setValue(user).addOnCompleteListener {
 

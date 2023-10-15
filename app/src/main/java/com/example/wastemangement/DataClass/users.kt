@@ -6,6 +6,7 @@ data class users(
     val mobno:String="",
     var address:String="",
     var image:String="",
+    var count:Int=0,
     val uid:String="",
     val fcmtoken:String=""
 )
