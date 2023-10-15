@@ -4,11 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Fragments.orgHomeFragment"
-    >
-
-
-
+    tools:context=".Fragments.orgHomeFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -100,6 +96,7 @@
             android:text="YOUR WASTE CATEGORY"
             android:textColor="@color/black"
             android:textSize="25dp" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewCategory"
             android:layout_width="match_parent"
@@ -107,57 +104,7 @@
 
         </androidx.recyclerview.widget.RecyclerView>
 
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:orientation="horizontal"-->
-<!--            android:layout_marginLeft="16dp"-->
-<!--            android:layout_marginTop="16dp">-->
-<!--            <ImageView-->
-<!--                android:id="@+id/imageView"-->
-<!--                android:layout_width="30dp"-->
-<!--                android:layout_height="30dp"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:src="@drawable/nonbiowaste" />-->
-<!--            <TextView-->
-<!--                android:id="@+id/BioWasteCount"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:fontFamily="@font/comfortaa_bold"-->
-<!--                android:text="BIO-DEGRADABLE WASTE"-->
-<!--                android:textColor="#3C6C38"-->
-<!--                android:textSize="17sp"-->
-<!--                android:layout_marginLeft="10dp"-->
-<!--                android:layout_gravity="center"-->
-<!--                app:layout_constraintBottom_toBottomOf="@+id/imageView2"-->
-<!--                app:layout_constraintStart_toEndOf="@+id/imageView2"-->
-<!--                app:layout_constraintTop_toTopOf="@+id/imageView2" />-->
-<!--        </LinearLayout>-->
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:orientation="horizontal"-->
-<!--            android:layout_marginLeft="16dp"-->
-<!--            android:layout_marginTop="16dp">-->
-<!--            <ImageView-->
-<!--                android:layout_width="30dp"-->
-<!--                android:layout_height="30dp"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:src="@drawable/recyclablewaste" />-->
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:fontFamily="@font/comfortaa_bold"-->
-<!--                android:text="RECYCLABLE WASTE"-->
-<!--                android:textColor="#3C6C38"-->
-<!--                android:textSize="17sp"-->
-<!--                android:layout_marginLeft="10dp"-->
-<!--                android:layout_gravity="center"-->
-<!--                app:layout_constraintBottom_toBottomOf="@+id/imageView2"-->
-<!--                app:layout_constraintStart_toEndOf="@+id/imageView2"-->
-<!--                app:layout_constraintTop_toTopOf="@+id/imageView2" />-->
-<!--        </LinearLayout>-->
-        <View
+        <!--View
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"/>
@@ -186,18 +133,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:padding="2dp">
+
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recyclerViewPickup"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
-
                     </androidx.recyclerview.widget.RecyclerView>
+
                 </ScrollView>
-
-
             </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-
+        </com.google.android.material.card.MaterialCardView-->
     </LinearLayout>
-
 </FrameLayout>
