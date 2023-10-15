@@ -15,6 +15,7 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
+import com.example.wastemangement.DataClass.collectionRequest
 import com.example.wastemangement.DataClass.notifyDataClass
 import com.example.wastemangement.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
