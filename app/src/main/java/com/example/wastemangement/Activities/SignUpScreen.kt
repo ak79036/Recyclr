@@ -170,7 +170,12 @@ class SignUpScreen : AppCompatActivity() {
                             }
                             // Get new FCM registration token
                             val token = task.result.toString()
-                            var user = users(name = name1, email = email1, fcmtoken=token, uid = mauth.uid.toString(), address = addr, image = imageUrl!!)
+                            var user = users()
+                            if(imageUrl!=null){
+                                user = users(name = name1, email = email1, fcmtoken=token, uid = mauth.uid.toString(), address = addr, image = imageUrl!!)
+                            }else{
+                                user = users(name = name1, email = email1, fcmtoken=token, uid = mauth.uid.toString(), address = addr)
+                            }
                             mdatabaseref.child("${firebaseuser.uid}").setValue(user).addOnCompleteListener {
 
                                 finishAffinity()
