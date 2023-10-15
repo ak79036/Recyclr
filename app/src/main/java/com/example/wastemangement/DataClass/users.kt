@@ -8,5 +8,6 @@ data class users(
     var image:String="",
     var count:Int=0,
     val uid:String="",
-    val fcmtoken:String=""
+    val fcmtoken:String="",
+    var wasteCounts: WasteCount = WasteCount(0,0)
 )

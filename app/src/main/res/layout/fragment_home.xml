@@ -121,7 +121,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="35dp"
                 android:fontFamily="@font/comfortaa_bold"
-                android:text="15"
+                android:text="0"
                 android:textColor="#3C6C38"
                 android:textSize="35sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -205,12 +205,25 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:fontFamily="@font/comfortaa_bold"
-        android:text="BIO-DEGRADABLE WASTE 12"
+        android:text="BIO-DEGRADABLE"
         android:textColor="#3C6C38"
         android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView2"
         app:layout_constraintStart_toEndOf="@+id/imageView2"
         app:layout_constraintTop_toTopOf="@+id/imageView2" />
+
+        <TextView
+            android:id="@+id/BioCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="25dp"
+            android:fontFamily="@font/comfortaa_bold"
+            android:text="0"
+            android:textColor="#3C6C38"
+            android:textSize="25sp"
+            app:layout_constraintBottom_toBottomOf="@+id/BioWasteCount"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/BioWasteCount" />
 
     <ImageView
         android:id="@+id/imageView3"
@@ -228,12 +241,25 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:fontFamily="@font/comfortaa_bold"
-        android:text="NON BIO-DEGRADABLE WASTE 12"
+        android:text="NON BIO-DEGRADABLE"
         android:textColor="#3C6C38"
         android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView3"
         app:layout_constraintStart_toEndOf="@+id/imageView3"
         app:layout_constraintTop_toTopOf="@+id/imageView3" />
+
+        <TextView
+            android:id="@+id/NonBioCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="25dp"
+            android:fontFamily="@font/comfortaa_bold"
+            android:text="0"
+            android:textColor="#3C6C38"
+            android:textSize="25sp"
+            app:layout_constraintBottom_toBottomOf="@+id/NonBioWasteCount"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/NonBioWasteCount" />
 
     <ImageView
         android:id="@+id/imageView4"
@@ -251,12 +277,25 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:fontFamily="@font/comfortaa_bold"
-        android:text="RECYCLABLE WASTE 12"
+        android:text="RECYCLABLE"
         android:textColor="#3C6C38"
         android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView4"
         app:layout_constraintStart_toEndOf="@+id/imageView4"
         app:layout_constraintTop_toTopOf="@+id/imageView4" />
+
+        <TextView
+            android:id="@+id/RecCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="25dp"
+            android:fontFamily="@font/comfortaa_bold"
+            android:text="0"
+            android:textColor="#3C6C38"
+            android:textSize="25sp"
+            app:layout_constraintBottom_toBottomOf="@+id/RecWasteCount"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/RecWasteCount" />
 
     <ImageView
         android:id="@+id/imageView5"
@@ -274,11 +313,24 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:fontFamily="@font/comfortaa_bold"
-        android:text="E-WASTE 12"
+        android:text="E-WASTE"
         android:textColor="#3C6C38"
         android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView5"
         app:layout_constraintStart_toEndOf="@+id/imageView5"
         app:layout_constraintTop_toTopOf="@+id/imageView5" />
+
+        <TextView
+            android:id="@+id/E_Count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="25dp"
+            android:fontFamily="@font/comfortaa_bold"
+            android:text="0"
+            android:textColor="#3C6C38"
+            android:textSize="25sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/EWasteCount" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

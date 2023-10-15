@@ -319,8 +319,12 @@ class WasteClassificationActivity : AppCompatActivity() {
         ERecView.adapter = eAdapter
 
         submitButton.setOnClickListener {
+            if(lat!=0.0&&long!=0.0)
+                databaseOps(bioAdapter.sendList(),nonBioAdapter.sendList(),recAdapter.sendList(),eAdapter.sendList())
+            else
+                Toast.makeText(this,"LOCATION NOT SELECTED!",Toast.LENGTH_SHORT).show()
             //uploadCollectionRequest(bioAdapter.sendList(),nonBioAdapter.sendList(),recAdapter.sendList(),eAdapter.sendList())
-            databaseOps(bioAdapter.sendList(),nonBioAdapter.sendList(),recAdapter.sendList(),eAdapter.sendList())
+
         }
     }
     /*private fun uploadCollectionRequest(bioList: ArrayList<String>, nonBioList: ArrayList<String>, RecList: ArrayList<String>, eList: ArrayList<String>)
@@ -465,12 +469,12 @@ class WasteClassificationActivity : AppCompatActivity() {
                                         Log.i("agencycalculation4", "$minFCM,$minUID,$minLat,$minLong")
                                         //Toast.makeText(baseContext,"Was Successful",Toast.LENGTH_SHORT).show()
 
-                                        val name = firebaseAuth.currentUser?.displayName!!
+                                        //val name = firebaseAuth.currentUser?.displayName!!
                                         val uid = firebaseAuth.currentUser?.uid!!
                                         firebaseAuth=FirebaseAuth.getInstance()
                                         dbrefuser =  FirebaseDatabase.getInstance().getReference("CollectionRequests")
 
-                                        val request = collectionRequest(uid = uid, name = name, biowastelist = bioList, nonbiowastelist = nonBioList, recwastelist = RecList, ewastelist = eList, city = city, lat = lat, long = long, bioAgency = bioAgency, nonBioAgency = nonBioAgency, recAgency = recAgency, eAgency = eAgency)
+                                        val request = collectionRequest(uid = uid, name = "", biowastelist = bioList, nonbiowastelist = nonBioList, recwastelist = RecList, ewastelist = eList, city = city, lat = lat, long = long, bioAgency = bioAgency, nonBioAgency = nonBioAgency, recAgency = recAgency, eAgency = eAgency)
                                         val key=dbrefuser.push().key!!
                                         dbrefuser.child(key).setValue(request).addOnSuccessListener {
                                             Toast.makeText(
@@ -483,10 +487,13 @@ class WasteClassificationActivity : AppCompatActivity() {
                                                 val user:users = snap.getValue(users::class.java)!!
                                                 snap.ref.removeValue()
                                                 user.count=user.count+1
+                                                user.wasteCounts.bioCount+=bioList.size
+                                                user.wasteCounts.nonBioCount+=nonBioList.size
+                                                user.wasteCounts.recCount+=RecList.size
+                                                user.wasteCounts.eCount+=eList.size
                                                 dbrefuser.child(firebaseAuth.uid.toString()).setValue(user)
 
                                             }
-
                                             val intent = Intent(this@WasteClassificationActivity,UploadFinishedActivity::class.java)
                                             startActivity(intent)
                                             finish()
