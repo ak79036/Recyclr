@@ -29,6 +29,9 @@ class WasteItemAdapter(val context: Context, var list: ArrayList<String>): Recyc
             notifyItemRemoved(position)
         }
     }
+    fun sendList(): ArrayList<String> {
+        return list
+    }
 
     class WasteItemViewHolder(itemView: View):RecyclerView.ViewHolder(itemView)
     {

@@ -8,10 +8,22 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wastemangement.Adapters.WasteItemAdapter
+import com.example.wastemangement.DataClass.Agency
+import com.example.wastemangement.DataClass.collectionRequest
+import com.example.wastemangement.DataClass.organisation
+import com.example.wastemangement.DataClass.users
 import com.example.wastemangement.R
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import kotlin.math.pow
 
 class WasteClassificationActivity : AppCompatActivity() {
     private lateinit var wasteList: ArrayList<String>
@@ -22,10 +34,14 @@ class WasteClassificationActivity : AppCompatActivity() {
 
     private lateinit var locationFetchButton:ImageView
     private lateinit var addressField:TextView
+    private lateinit var submitButton: AppCompatButton
 
     private var city: String = ""
     private var lat: Double = 0.0
     private var long: Double = 0.0
+
+    private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var dbrefuser: DatabaseReference
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -54,6 +70,7 @@ class WasteClassificationActivity : AppCompatActivity() {
         nonBioRecView = findViewById(R.id.NonBioRecView)
         recRecView = findViewById(R.id.RecRecView)
         ERecView = findViewById(R.id.ERecView)
+        submitButton=findViewById(R.id.submitButton)
 
         locationFetchButton=findViewById(R.id.LocationfetchButton)
 
@@ -286,17 +303,217 @@ class WasteClassificationActivity : AppCompatActivity() {
         Log.i("testing", ewaste.size.toString())
 
         bioRecView.layoutManager = LinearLayoutManager(this)
-        bioRecView.adapter = WasteItemAdapter(this, biowaste)
+        val bioAdapter=WasteItemAdapter(this,biowaste)
+        bioRecView.adapter = bioAdapter
 
         nonBioRecView.layoutManager = LinearLayoutManager(this)
-        nonBioRecView.adapter = WasteItemAdapter(this, nonbiowaste)
+        val nonBioAdapter = WasteItemAdapter(this, nonbiowaste)
+        nonBioRecView.adapter = nonBioAdapter
 
         recRecView.layoutManager = LinearLayoutManager(this)
-        recRecView.adapter = WasteItemAdapter(this, recwaste)
+        val recAdapter = WasteItemAdapter(this, recwaste)
+        recRecView.adapter = recAdapter
 
         ERecView.layoutManager = LinearLayoutManager(this)
-        ERecView.adapter = WasteItemAdapter(this, ewaste)
+        val eAdapter = WasteItemAdapter(this, ewaste)
+        ERecView.adapter = eAdapter
 
+        submitButton.setOnClickListener {
+            //uploadCollectionRequest(bioAdapter.sendList(),nonBioAdapter.sendList(),recAdapter.sendList(),eAdapter.sendList())
+            databaseOps(bioAdapter.sendList(),nonBioAdapter.sendList(),recAdapter.sendList(),eAdapter.sendList())
+        }
+    }
+    /*private fun uploadCollectionRequest(bioList: ArrayList<String>, nonBioList: ArrayList<String>, RecList: ArrayList<String>, eList: ArrayList<String>)
+    {
+        firebaseAuth=FirebaseAuth.getInstance()
+        dbrefuser =  FirebaseDatabase.getInstance().getReference("CollectionRequests")
+
+        val request = collectionRequest(uid = "", fcmtoken = "", biowastelist = bioList, nonbiowastelist = nonBioList, recwastelist = RecList, ewastelist = eList, city = city, lat = lat, long = long)
+        val key=dbrefuser.push().key!!
+        dbrefuser.child(key).setValue(request).addOnSuccessListener {
+            Toast.makeText(this,"SUCCESSFULLY UPLOADED",Toast.LENGTH_SHORT).show()
+        }
+    }*/
+
+
+    private fun databaseOps(bioList: ArrayList<String>, nonBioList: ArrayList<String>, RecList: ArrayList<String>, eList: ArrayList<String>) {
+        firebaseAuth=FirebaseAuth.getInstance()
+        dbrefuser =  FirebaseDatabase.getInstance().getReference("Organization")
+
+        var bioAgency:Agency
+        var nonBioAgency:Agency
+        var recAgency:Agency
+        var eAgency:Agency
+
+
+        var minFCM=""
+        var minUID=""
+        var minLat=0.0
+        var minLong=0.0
+        var distance = ((lat - minLat).pow(2.0)) + ((long-minLong).pow(2))
+        dbrefuser.child("biode").addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for(postSnapshot in snapshot.children)
+                {
+                    val user:organisation = postSnapshot.getValue(organisation::class.java)!!
+                    //val fcm = postSnapshot.child("fcmtoken").value as String
+
+                    val latitude:Double = postSnapshot.child("lat").value as Double
+                    val longitude:Double = postSnapshot.child("long").value as Double
+                    //val uid = postSnapshot.child("uid").value as String
+                    val uid = user.uid
+                    val fcm = user.fcmtoken
+                    //Log.i("agencycalculation",uid+","+fcm)
+                    val d1 = ((latitude - lat).pow(2.0)) + ((longitude-long).pow(2.0))
+                    if(d1<distance)
+                    {
+                        distance=d1
+                        minLat=latitude
+                        minLong=longitude
+                        minFCM=fcm
+                        minUID=uid
+                    }
+                }
+                bioAgency= Agency(uid = minUID, fcmtoken = minFCM)
+                Log.i("agencycalculation1", "$minFCM,$minUID,$minLat,$minLong")
+                minFCM=""
+                minUID=""
+                minLat=0.0
+                minLong=0.0
+                distance = ((lat - minLat).pow(2.0)) + ((long-minLong).pow(2))
+                dbrefuser.child("nonbiode").addValueEventListener(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        for (postSnapshot in snapshot.children) {
+                            val user: organisation =
+                                postSnapshot.getValue(organisation::class.java)!!
+                            //val fcm = postSnapshot.child("fcmtoken").value as String
+
+                            val latitude: Double = postSnapshot.child("lat").value as Double
+                            val longitude: Double = postSnapshot.child("long").value as Double
+                            //val uid = postSnapshot.child("uid").value as String
+                            val uid = user.uid
+                            val fcm = user.fcmtoken
+                            //Log.i("agencycalculation",uid+","+fcm)
+                            val d1 = ((latitude - lat).pow(2.0)) + ((longitude - long).pow(2.0))
+                            if (d1 < distance) {
+                                distance = d1
+                                minLat = latitude
+                                minLong = longitude
+                                minFCM = fcm
+                                minUID = uid
+                            }
+                        }
+                        nonBioAgency = Agency(uid = minUID, fcmtoken = minFCM)
+                        Log.i("agencycalculation2", "$minFCM,$minUID,$minLat,$minLong")
+                        //Toast.makeText(baseContext,"Was Successful",Toast.LENGTH_SHORT).show()
+                        minFCM=""
+                        minUID=""
+                        minLat=0.0
+                        minLong=0.0
+                        distance = ((lat - minLat).pow(2.0)) + ((long-minLong).pow(2))
+                        dbrefuser.child("ewaste").addValueEventListener(object : ValueEventListener {
+                            override fun onDataChange(snapshot: DataSnapshot) {
+                                for (postSnapshot in snapshot.children) {
+                                    val user: organisation =
+                                        postSnapshot.getValue(organisation::class.java)!!
+                                    //val fcm = postSnapshot.child("fcmtoken").value as String
+
+                                    val latitude: Double = postSnapshot.child("lat").value as Double
+                                    val longitude: Double = postSnapshot.child("long").value as Double
+                                    //val uid = postSnapshot.child("uid").value as String
+                                    val uid = user.uid
+                                    val fcm = user.fcmtoken
+                                    //Log.i("agencycalculation",uid+","+fcm)
+                                    val d1 = ((latitude - lat).pow(2.0)) + ((longitude - long).pow(2.0))
+                                    if (d1 < distance) {
+                                        distance = d1
+                                        minLat = latitude
+                                        minLong = longitude
+                                        minFCM = fcm
+                                        minUID = uid
+                                    }
+                                }
+                                eAgency = Agency(uid = minUID, fcmtoken = minFCM)
+                                Log.i("agencycalculation3", "$minFCM,$minUID,$minLat,$minLong")
+                                //Toast.makeText(baseContext,"Was Successful",Toast.LENGTH_SHORT).show()
+                                minFCM=""
+                                minUID=""
+                                minLat=0.0
+                                minLong=0.0
+                                distance = ((lat - minLat).pow(2.0)) + ((long-minLong).pow(2))
+                                dbrefuser.child("recyclabe").addValueEventListener(object : ValueEventListener {
+                                    override fun onDataChange(snapshot: DataSnapshot) {
+                                        for (postSnapshot in snapshot.children) {
+                                            val user: organisation =
+                                                postSnapshot.getValue(organisation::class.java)!!
+                                            //val fcm = postSnapshot.child("fcmtoken").value as String
+
+                                            val latitude: Double = postSnapshot.child("lat").value as Double
+                                            val longitude: Double = postSnapshot.child("long").value as Double
+                                            //val uid = postSnapshot.child("uid").value as String
+                                            val uid = user.uid
+                                            val fcm = user.fcmtoken
+                                            //Log.i("agencycalculation",uid+","+fcm)
+                                            val d1 = ((latitude - lat).pow(2.0)) + ((longitude - long).pow(2.0))
+                                            if (d1 < distance) {
+                                                distance = d1
+                                                minLat = latitude
+                                                minLong = longitude
+                                                minFCM = fcm
+                                                minUID = uid
+                                            }
+                                        }
+                                        recAgency = Agency(uid = minUID, fcmtoken = minFCM)
+                                        Log.i("agencycalculation4", "$minFCM,$minUID,$minLat,$minLong")
+                                        //Toast.makeText(baseContext,"Was Successful",Toast.LENGTH_SHORT).show()
+
+
+
+                                        val name = firebaseAuth.currentUser?.displayName!!
+                                        val uid = firebaseAuth.currentUser?.uid!!
+                                        firebaseAuth=FirebaseAuth.getInstance()
+                                        dbrefuser =  FirebaseDatabase.getInstance().getReference("CollectionRequests")
+
+                                        val request = collectionRequest(uid = uid, name = name, biowastelist = bioList, nonbiowastelist = nonBioList, recwastelist = RecList, ewastelist = eList, city = city, lat = lat, long = long, bioAgency = bioAgency, nonBioAgency = nonBioAgency, recAgency = recAgency, eAgency = eAgency)
+                                        val key=dbrefuser.push().key!!
+                                        dbrefuser.child(key).setValue(request).addOnSuccessListener {
+                                            Toast.makeText(
+                                                baseContext,
+                                                "SUCCESSFULLY UPLOADED",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                        }
+                                    }
+
+                                    override fun onCancelled(error: DatabaseError) {
+                                        TODO("Not yet implemented")
+                                    }
+
+                                })
+                            }
+
+                            override fun onCancelled(error: DatabaseError) {
+                                TODO("Not yet implemented")
+                            }
+
+                        })
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        TODO("Not yet implemented")
+                    }
+
+                })
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        }
+
+        )
 
     }
 }

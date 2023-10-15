@@ -35,7 +35,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import okhttp3.Dispatcher
 
-class SignUpScreen : AppCompatActivity() {
+class   SignUpScreen : AppCompatActivity() {
     private lateinit var mdatabaseref : DatabaseReference
     private val cloudinary = Cloudinary("cloudinary://621452581592841:jgeMsIs1fffBPUm53Qiqk3LBsno@dqev44wx0")
     private lateinit var mauth:FirebaseAuth
