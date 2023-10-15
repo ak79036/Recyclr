@@ -34,71 +34,76 @@ private lateinit var mdatabaseref: DatabaseReference
     ): View? {
         val root =  inflater.inflate(R.layout.fragment_notification, container, false)
         val button = root.findViewById<Button>(R.id.sendbtn)
-
-
-        mauth=FirebaseAuth.getInstance()
-       mdatabaseref=FirebaseDatabase.getInstance().getReference("CollectionRequests")
         button.setOnClickListener {
-            mdatabaseref.addValueEventListener(object :ValueEventListener{
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    for(snapshot2 in snapshot.children)
-                    {
-                        val collection= snapshot2.getValue(collectionRequest::class.java)!!
-                        val bioagent=collection.bioAgency.fcmtoken
-                        val city=collection.city
-                        if(bioagent.isNotEmpty())
-                        {
-                            val title:String="Biodegradable Waste"
-                            val message:String="This $city Area has Biodegradable Waste.Please Come and Collect That Waste"
-                            PushNotification(Notificationdata(title, message), bioagent).also { it->
-                                sendNotification(it)
-
-
-                            }
-                        }
-                        val nonbioagent = collection.nonBioAgency.fcmtoken
-                        if(nonbioagent.isNotEmpty())
-                        {
-                            val title:String ="NonBioDegradable Waste"
-                            val message:String ="This $city Area has NonBiodegradable Waste.Please Come and Collect That Waste"
-                            PushNotification(Notificationdata(title, message), nonbioagent).also { it->
-                                sendNotification(it)
-
-
-                            }
-                        }
-                        val recagent =collection.recAgency.fcmtoken
-                        if(recagent.isNotEmpty())
-                        {
-                            val title:String ="Recyclable Waste"
-                            val message:String ="This $city Area has Recyclable Waste.Please Come and Collect That Waste"
-                            PushNotification(Notificationdata(title, message), recagent).also { it->
-                                sendNotification(it)
-
-
-                            }
-                        }
-                        val ewagent =collection.eAgency.fcmtoken
-                        if(ewagent.isNotEmpty())
-                        {
-                            val title:String ="E-Waste"
-                            val message:String ="This $city Area has Electronics Waste.Please Come and Collect That Waste"
-                            PushNotification(Notificationdata(title, message), ewagent).also { it->
-                                sendNotification(it)
-
-
-                            }
-                        }
-
-                    }
+            val token =
+                "fyDXmPkQSsefA7G3ocu9ZS:APA91bHs3i1E7fFI16HKQjUQ7eiN683jxsiT5RunelgSl6krydVn9Rhy4SY2UaZr_9lnvbZwWWYZ7sNeBENM2MRW9Pn-8BcRPez56TUlVWW7ya_XhFylzWrgvRmAbtUkxKMcosbnM4K_"
+            PushNotification(Notificationdata("waste", "please collect the data from there"), token)
+                .also { it ->
+                    sendNotification(it)
                 }
-
-                override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
-                }
-
-            })
         }
+//        mauth=FirebaseAuth.getInstance()
+//       mdatabaseref=FirebaseDatabase.getInstance().getReference("CollectionRequests")
+//        button.setOnClickListener {
+//            mdatabaseref.addValueEventListener(object :ValueEventListener{
+//                override fun onDataChange(snapshot: DataSnapshot) {
+//                    for(snapshot2 in snapshot.children)
+//                    {
+//                        val collection= snapshot2.getValue(collectionRequest::class.java)
+//                        if(collection!=null) {
+//                            val bioagent=collection.bioAgency.fcmtoken
+//                            val city=collection.city
+//                            if(bioagent.isNotEmpty())
+//                            {
+//                                val title:String="Biodegradable Waste"
+//                                val message:String="This $city Area has Biodegradable Waste.Please Come and Collect That Waste"
+//                                PushNotification(Notificationdata(title, message), bioagent).also { it->
+//                                    sendNotification(it)
+//                                }
+//                            }
+//                            val nonbioagent = collection.nonBioAgency.fcmtoken
+//                            if(nonbioagent.isNotEmpty())
+//                            {
+//                                val title:String ="NonBioDegradable Waste"
+//                                val message:String ="This $city Area has NonBiodegradable Waste.Please Come and Collect That Waste"
+//                                PushNotification(Notificationdata(title, message), nonbioagent).also { it->
+//                                    sendNotification(it)
+//
+//
+//                                }
+//                            }
+//                            val recagent =collection.recAgency.fcmtoken
+//                            if(recagent.isNotEmpty())
+//                            {
+//                                val title:String ="Recyclable Waste"
+//                                val message:String ="This $city Area has Recyclable Waste.Please Come and Collect That Waste"
+//                                PushNotification(Notificationdata(title, message), recagent).also { it->
+//                                    sendNotification(it)
+//
+//
+//                                }
+//                            }
+//                            val ewagent =collection.eAgency.fcmtoken
+//                            if(ewagent.isNotEmpty())
+//                            {
+//                                val title:String ="E-Waste"
+//                                val message:String ="This $city Area has Electronics Waste.Please Come and Collect That Waste"
+//                                PushNotification(Notificationdata(title, message), ewagent).also { it->
+//                                    sendNotification(it)
+//
+//
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//
+//                override fun onCancelled(error: DatabaseError) {
+//                    TODO("Not yet implemented")
+//                }
+//
+//            })
+//        }
 
 
 

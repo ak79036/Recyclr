@@ -26,15 +26,6 @@
         android:textSize="32dp"
         android:textStyle="bold" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:paddingBottom="8dp"
-        android:text="Edit Profile"
-        android:textColor="#FF85AB70" />
-
     <LinearLayout
         android:id="@+id/address"
         android:layout_width="match_parent"
@@ -99,41 +90,6 @@
                 android:layout_height="match_parent"
                 android:lines="1" />
         </com.google.android.material.textfield.TextInputLayout>
-
-        <LinearLayout
-            android:id="@+id/share"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:paddingVertical="16dp">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start|center_vertical"
-                android:src="@drawable/baseline_share_24"
-                app:tint="#FF808080"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:gravity="start"
-                android:text="Share App"
-                android:paddingStart="24dp"
-                android:textSize="16dp" />
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_weight="5"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                app:tint="#FF808080"
-                android:src="@drawable/baseline_keyboard_arrow_right_24" />
-
-        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/about"

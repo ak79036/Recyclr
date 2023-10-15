@@ -17,6 +17,8 @@ class collectionAdapter (private val List: ArrayList<collectionRequest>) :
         val nonBioWL : TextView = itemView.findViewById(R.id.nonbiowasteList)
         val recWL : TextView = itemView.findViewById(R.id.recwasteList)
         val eWL : TextView = itemView.findViewById(R.id.ewasteList)
+        val lat : TextView = itemView.findViewById(R.id.latitude)
+        val long : TextView = itemView.findViewById(R.id.longitude)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
@@ -29,46 +31,18 @@ class collectionAdapter (private val List: ArrayList<collectionRequest>) :
 
         holder.city.text = List[position].city
 
-        var bioWaste = ""
-        for((index,i) in List[position].biowastelist.withIndex()){
-            if(index==0){
-                bioWaste += List[position].biowastelist
-            }else{
-                bioWaste += ", " + List[position].biowastelist
-            }
-        }
+        val bioWaste = List[position].biowastelist.toString()
+        val nonBioWaste = List[position].nonbiowastelist.toString()
+        val recWaste = List[position].recwastelist.toString()
+        val eWaste = List[position].ewastelist.toString()
 
-        var nonBioWaste = ""
-        for((index,i) in List[position].nonbiowastelist.withIndex()){
-            if(index==0){
-                nonBioWaste += List[position].nonbiowastelist
-            }else{
-                nonBioWaste += ", " + List[position].nonbiowastelist
-            }
-        }
-
-        var recWaste = ""
-        for((index,i) in List[position].recwastelist.withIndex()){
-            if(index==0){
-                recWaste += List[position].recwastelist
-            }else{
-                recWaste += ", " + List[position].recwastelist
-            }
-        }
-
-        var eWaste = ""
-        for((index,i) in List[position].ewastelist.withIndex()){
-            if(index==0){
-                eWaste += List[position].ewastelist
-            }else{
-                eWaste += ", " + List[position].ewastelist
-            }
-        }
 
         holder.bioWL.text = bioWaste
         holder.nonBioWL.text = nonBioWaste
         holder.recWL.text = recWaste
         holder.eWL.text = eWaste
+        holder.lat.text = List[position].lat.toString()
+        holder.long.text = List[position].long.toString()
 
     }
 

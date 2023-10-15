@@ -87,7 +87,7 @@ class LoginScreen : AppCompatActivity() {
                 if(task.isSuccessful)
                 {
                     finishAffinity()
-                    val intent = Intent(this, MainActivity::class.java)
+                    val intent = Intent(this, OrganizationMainActivity::class.java)
                     startActivity(intent)
                 }
                 else
