@@ -482,25 +482,40 @@ class WasteClassificationActivity : AppCompatActivity() {
                                                 "SUCCESSFULLY UPLOADED",
                                                 Toast.LENGTH_SHORT
                                             ).show()
+                                            val intent = Intent(this@WasteClassificationActivity,UploadFinishedActivity::class.java)
+                                            startActivity(intent)
+                                            finish()
                                         }
                                     }
 
                                     override fun onCancelled(error: DatabaseError) {
-                                        TODO("Not yet implemented")
+                                        Toast.makeText(
+                                            baseContext,
+                                            "Database Error",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
                                     }
 
                                 })
                             }
 
                             override fun onCancelled(error: DatabaseError) {
-                                TODO("Not yet implemented")
+                                Toast.makeText(
+                                    baseContext,
+                                    "Database Error",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
 
                         })
                     }
 
                     override fun onCancelled(error: DatabaseError) {
-                        TODO("Not yet implemented")
+                        Toast.makeText(
+                            baseContext,
+                            "Database Error",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
 
                 })
@@ -508,12 +523,14 @@ class WasteClassificationActivity : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+                Toast.makeText(
+                    baseContext,
+                    "Database Error",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
 
-        }
-
-        )
+        })
 
     }
 }
