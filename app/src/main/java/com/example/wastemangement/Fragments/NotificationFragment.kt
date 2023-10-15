@@ -7,15 +7,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import com.example.wastemangement.DataClass.collectionRequest
 import com.example.wastemangement.Notification.Notificationdata
 import com.example.wastemangement.Notification.PushNotification
 import com.example.wastemangement.Notification.RetrofitInstance
 import com.example.wastemangement.R
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.messaging.FirebaseMessaging
-import com.google.gson.Gson
+import com.google.firebase.database.ValueEventListener
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -30,34 +32,90 @@ private lateinit var mdatabaseref: DatabaseReference
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        mauth=FirebaseAuth.getInstance()
-       mdatabaseref=FirebaseDatabase.getInstance().getReference("Organization").child("biode")
-           val token="com.google.firebase.auth.internal.zzr@680c426"
-            FirebaseMessaging.getInstance().subscribeToTopic(Topic)
-//        dbrefNotify= FirebaseDatabase.getInstance().getReference("ToNotify")
         val root =  inflater.inflate(R.layout.fragment_notification, container, false)
         val button = root.findViewById<Button>(R.id.sendbtn)
 
 
-
+        mauth=FirebaseAuth.getInstance()
+       mdatabaseref=FirebaseDatabase.getInstance().getReference("CollectionRequests")
         button.setOnClickListener {
-           val title:String="Wastage"
-            val message:String="GO And Check the wastage in Map"
-           PushNotification(Notificationdata(title,message), token).also { it->
-               sendNotification(it)
+            mdatabaseref.addValueEventListener(object :ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    for(snapshot2 in snapshot.children)
+                    {
+                        val collection= snapshot2.getValue(collectionRequest::class.java)!!
+                        val bioagent=collection.bioAgency.fcmtoken
+                        val city=collection.city
+                        if(bioagent.isNotEmpty())
+                        {
+                            val title:String="Biodegradable Waste"
+                            val message:String="This $city Area has Biodegradable Waste.Please Come and Collect That Waste"
+                            PushNotification(Notificationdata(title, message), bioagent).also { it->
+                                sendNotification(it)
 
 
-           }
+                            }
+                        }
+                        val nonbioagent = collection.nonBioAgency.fcmtoken
+                        if(nonbioagent.isNotEmpty())
+                        {
+                            val title:String ="NonBioDegradable Waste"
+                            val message:String ="This $city Area has NonBiodegradable Waste.Please Come and Collect That Waste"
+                            PushNotification(Notificationdata(title, message), nonbioagent).also { it->
+                                sendNotification(it)
+
+
+                            }
+                        }
+                        val recagent =collection.recAgency.fcmtoken
+                        if(recagent.isNotEmpty())
+                        {
+                            val title:String ="Recyclable Waste"
+                            val message:String ="This $city Area has Recyclable Waste.Please Come and Collect That Waste"
+                            PushNotification(Notificationdata(title, message), recagent).also { it->
+                                sendNotification(it)
+
+
+                            }
+                        }
+                        val ewagent =collection.eAgency.fcmtoken
+                        if(ewagent.isNotEmpty())
+                        {
+                            val title:String ="E-Waste"
+                            val message:String ="This $city Area has Electronics Waste.Please Come and Collect That Waste"
+                            PushNotification(Notificationdata(title, message), ewagent).also { it->
+                                sendNotification(it)
+
+
+                            }
+                        }
+
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+
+            })
         }
+
+
+
+//            FirebaseMessaging.getInstance().subscribeToTopic(Topic)
+//        dbrefNotify= FirebaseDatabase.getInstance().getReference("ToNotify")
+
+
+
+
 
         return root
     }
 
     private fun sendNotification(notification:PushNotification)=CoroutineScope(Dispatchers.IO).launch {
   try {
-      val response= RetrofitInstance.api.postNotification(notification)
-              if(response.isSuccessful)
+         val response= RetrofitInstance.api.postNotification(notification)
+                 if(response.isSuccessful)
       {
           Log.d(TAG, "Response:")
       }
