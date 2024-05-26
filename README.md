@@ -33,33 +33,33 @@ The idea for the Waste Management and Sustainability App stems from the urgent n
 * pandas
   
 ## Brief Implementation details
-*The App will be coded natively in Kotlin using
+* The App will be coded natively in Kotlin using
 Android Studio as the IDE.
-*The front-end will be done using digital
+* The front-end will be done using digital
 design tools for UI design such as FIGMA and
 create XML layouts.
-*The App authentication and database
+* The App authentication and database
 handling will be handled using the Firebase
 Realtime Database and Authentication.
-*The uploaded images will be stored and
+* The uploaded images will be stored and
 displayed using Cloudinary.
-*The waste detection and classification
+* The waste detection and classification
 algorithm will be based on a GitHub Library:
 detect-waste by AgaMiko. It will be modified
 and retrained to suit our purposes.
-*The ML model recieved will be in PyTorch
+* The ML model recieved will be in PyTorch
 framework which cannot be easily
 implemented. So this will be converted to a
 .tflite model and then implemented directly
 into our app.
-*The beautiful interactive dynamic maps will be done
+* The beautiful interactive dynamic maps will be done
 using the MapBox SDK.
-*Social media messages and sharing will be
+* Social media messages and sharing will be
 implemented directly via intent launchers.
-*A comprehensive notification and alarm system will
+* A comprehensive notification and alarm system will
 be created using Android's inbuilt Notification
 Manager.
-*The Alert System and the Scheduling of waste
+* The Alert System and the Scheduling of waste
 Pickups and classifications will be done via FireBase.
  
 
@@ -100,17 +100,17 @@ seek to make a positive impact together.
 
 # Use Cases
 
-*Individuals can use the app for personal waste
+* Individuals can use the app for personal waste
 management, accessing waste sorting guidance,
 reminders, and gamification features to enhance their
 eco-conscious living.
-*The app can become a daily necessity by simplifying
+* The app can become a daily necessity by simplifying
 the waste classification and waste disposal process
 exponentially.
-*Families can use the app to coordinate waste
+* Families can use the app to coordinate waste
 management efforts and reminders for multiple
 household members.
-*Environmental organizations can promote the app to
+* Environmental organizations can promote the app to
 encourage responsible waste management and
 engage with their members to drive sustainability
 initiatives.
