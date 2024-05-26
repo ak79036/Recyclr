@@ -1,5 +1,5 @@
 
-# RAKSHAK
+# RECYCLR
 ### A project made with ❤️ by 
 * [Aritra Biswas](https://github.com/AritraBiswas9788)
 * [Aditya Kumar](https://github.com/ak79036)
